@@ -43,6 +43,17 @@
       "date": "2026-06-01",
       "note": null,
       "ts": 1781778483248
+    },
+    {
+      "id": "mqjd294jfr6o",
+      "type": "gasto",
+      "cat": "apps",
+      "sub": null,
+      "detail": "Clash of clans",
+      "amount": 7.99,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778748339
     }
   ],
   "config": {
