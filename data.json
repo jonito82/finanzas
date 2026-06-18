@@ -263,6 +263,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780451865
+    },
+    {
+      "id": "mqje35392sbz",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "MAIN",
+      "amount": 9.81,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780469381
     }
   ],
   "config": {
