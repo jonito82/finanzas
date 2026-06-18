@@ -208,6 +208,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781779076545
+    },
+    {
+      "id": "mqje1fo6np05",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "Iberdrola",
+      "amount": 0.32,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780389782
     }
   ],
   "config": {
