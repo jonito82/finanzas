@@ -312,9 +312,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
 .patr-chart-title{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px}
 .patr-chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
 .patr-chart{display:flex;align-items:flex-end;gap:5px;height:80px;padding:0 2px}
-.patr-bar-grp{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;width:34px}
-.patr-bar{border-radius:4px 4px 0 0;background:var(--green);width:26px;min-height:3px}
+.patr-bar-grp{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;width:30px}
+.patr-bar{border-radius:4px 4px 0 0;background:var(--green);width:22px;min-height:3px}
 .patr-bar-lbl{font-size:9px;color:var(--text4);text-align:center}
+.patr-bar-yr{font-size:7px;color:var(--text4);text-align:center;height:9px;line-height:9px;font-weight:600;letter-spacing:.03em}
+.patr-year-legend{display:flex;flex-wrap:wrap;gap:8px 14px;padding:10px 14px 4px;justify-content:center}
+.patr-year-leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3)}
+.patr-year-leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 .patr-btn-add{margin:10px 12px 0;background:var(--green);border:none;border-radius:14px;padding:14px;width:calc(100% - 24px);color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
 .patr-btn-add:active{opacity:.8}
 .patr-hist-card{background:var(--bg3);border-radius:18px;margin:10px 12px 0;padding:14px;border:0.5px solid var(--border)}
@@ -380,7 +384,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
     <button class="sb-item active" id="sbTab-inicio" onclick="setTab('inicio')"><i class="ti ti-home"></i>Inicio</button>
     <button class="sb-item" id="sbTab-stats" onclick="setTab('stats')"><i class="ti ti-chart-bar"></i>Estadísticas</button>
     <button class="sb-item" id="sbTab-hist" onclick="setTab('hist')"><i class="ti ti-list"></i>Historial</button>
-    <button class="sb-item" id="sbTab-config" onclick="setTab('config')"><i class="ti ti-settings"></i>Ajustes</button>
   </div>
   <button class="sb-add-btn" onclick="setTab('add')"><i class="ti ti-plus"></i>Nuevo movimiento</button>
   <div class="sb-sync">
@@ -397,7 +400,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
       <div class="navbar-title" id="navTitle">Mis finanzas</div>
       <div class="navbar-sub" id="navSub"></div>
     </div>
-    <button class="navbar-btn" id="navBtn" onclick="syncNow()" style="display:none"><i class="ti ti-refresh"></i></button>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button class="navbar-btn" id="navBtn" onclick="syncNow()" style="display:none"><i class="ti ti-refresh"></i></button>
+      <button class="navbar-btn" onclick="setTab('config')" title="Ajustes" style="display:flex"><i class="ti ti-settings"></i></button>
+    </div>
   </div>
 
   <div class="scroll" id="mainScroll">
@@ -1408,6 +1414,7 @@ async function loadFromGitHub(){
     const localOnly=DATA.entries.filter(e=>!remoteIds.has(e.id));
     DATA.entries=[...(remote.entries||[]),...localOnly];
     if(remote.patrimonio)DATA.patrimonio=remote.patrimonio;
+    if(remote.cartera)DATA.cartera=remote.cartera;
     if(remote.config)DATA.config={...DATA.config,...remote.config,token:DATA.config.token};
     saveLocal(); renderAll(); loadCfgUI();
     setSyncStatus('ok','Sincronizado · '+new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}));
@@ -1417,7 +1424,7 @@ async function syncToGitHub(){
   const{user,repo,token}=DATA.config; if(!user||!repo||!token)return;
   setSyncStatus('pending','Guardando...');
   try{
-    const payload={entries:DATA.entries,patrimonio:DATA.patrimonio||[],config:{...DATA.config,token:undefined}};
+    const payload={entries:DATA.entries,patrimonio:DATA.patrimonio||[],cartera:DATA.cartera||[],config:{...DATA.config,token:undefined}};
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2))));
     const body={message:'update',content}; if(syncSha)body.sha=syncSha;
     const r=await fetch(`https://api.github.com/repos/${user}/${repo}/contents/data.json`,{
@@ -1576,19 +1583,37 @@ function renderEvolucion(){
     eg.appendChild(d);
   });
 
-  // Chart
+  // Chart — colores por año
   const ch=document.getElementById('patrChart'); ch.innerHTML='';
   const mx=Math.max(...totals,1);
   const mn=Math.min(...totals,0);
   const range=mx-mn||1;
+  // Colores por año
+  const YEAR_COLORS=['#0a84ff','#30d158','#ffd60a','#ff9f0a','#bf5af2','#ff453a','#64d2ff','#ff6b6b'];
+  const years=[...new Set(recs.map(r=>r.date.slice(0,4)))].sort();
+  const yearColorMap={};
+  years.forEach((y,i)=>yearColorMap[y]=YEAR_COLORS[i%YEAR_COLORS.length]);
+
+  let prevYear=null;
   recs.forEach((r,i)=>{
     const t=totals[i];
     const h=Math.max(4,Math.round((t-mn)/range*68));
-    const lbl=new Date(r.date+'T00:00').toLocaleDateString('es-ES',{month:'short'}).replace('.','');
+    const yr=r.date.slice(0,4);
+    const mo=new Date(r.date+'T00:00').toLocaleDateString('es-ES',{month:'short'}).replace('.','');
+    const showYear=yr!==prevYear; prevYear=yr;
+    const color=yearColorMap[yr];
     const grp=document.createElement('div'); grp.className='patr-bar-grp';
-    grp.innerHTML=`<div class="patr-bar" style="height:${h}px"></div><div class="patr-bar-lbl">${lbl}</div>`;
+    grp.innerHTML=`<div class="patr-bar" style="height:${h}px;background:${color}"></div>`+
+      `<div class="patr-bar-lbl">${mo}</div>`+
+      (showYear?`<div class="patr-bar-yr">${yr}</div>`:'<div class="patr-bar-yr"></div>');
     ch.appendChild(grp);
   });
+
+  // Leyenda de años
+  const chartCard=ch.closest('.patr-chart-card');
+  let leg=chartCard.querySelector('.patr-year-legend');
+  if(!leg){leg=document.createElement('div');leg.className='patr-year-legend';chartCard.appendChild(leg);}
+  leg.innerHTML=years.map(y=>`<div class="patr-year-leg-item"><div class="patr-year-leg-dot" style="background:${yearColorMap[y]}"></div><span>${y}</span></div>`).join('');
 
   // History
   const hCard=document.getElementById('patrHistCard');
