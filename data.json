@@ -274,6 +274,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780469381
+    },
+    {
+      "id": "mqje3l7f3rrt",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "RHI",
+      "amount": 11.23,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780490267
     }
   ],
   "config": {
