@@ -635,7 +635,7 @@ function init(){
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
 function toISO(d){return d.toISOString().split('T')[0];}
-function fmtEur(n){return Math.round(n||0).toLocaleString('es-ES')+' €';}
+function fmtEur(n){return (n||0).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';}
 function fmtEurDec(n){return (n||0).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';}
 function mKey(d){return d.slice(0,7);}
 function saveLocal(){localStorage.setItem('jf_data',JSON.stringify(DATA));}
@@ -769,7 +769,7 @@ function renderStats(){
   const aEl=document.getElementById('sAhorro'); aEl.textContent=fmtEur(aho); aEl.className='stat-num '+(aho>=0?'pos':'neg');
   document.getElementById('sInvertido').textContent=fmtEur(inv);
   const tEl=document.getElementById('sTasa'); tEl.textContent=tasa+'%'; tEl.style.color=tasa>=meta?'var(--green)':tasa>0?'var(--orange)':'var(--red)';
-  document.getElementById('sGastoDia').textContent=fmtEur(Math.round(days>0?gas/days:0));
+  document.getElementById('sGastoDia').textContent=fmtEur(days>0?gas/days:0);
   document.getElementById('sInvTrend').textContent=ing>0?Math.round(inv/ing*100)+'% de ingresos':'';
   document.getElementById('sIngTrend').textContent=''; document.getElementById('sGasTrend').textContent=''; document.getElementById('sAhTrend').textContent='';
   const pct=Math.max(0,Math.min(tasa,100));
@@ -1062,7 +1062,7 @@ function editEntry(id){
   editId=id;
   // set state BEFORE setTab so resetForm doesn't wipe it
   currentType=e.type; currentCat=e.cat; currentSub=e.sub||null; currentDetail=e.detail||null;
-  amountStr=e.amount.toFixed(2).replace('.',',').replace(',00',''); currentDate=e.date;
+  amountStr=e.amount.toFixed(2).replace('.',','); currentDate=e.date;
   setTab('add');
   setTimeout(()=>{
     updateTypeUI(); updateAmountDisplay();
