@@ -1055,6 +1055,171 @@
       "date": "2026-05-01",
       "note": null,
       "ts": 1777593600000
+    },
+    {
+      "id": "eyhppwtd",
+      "type": "inversion",
+      "cat": "inversion",
+      "sub": null,
+      "detail": null,
+      "amount": 2783,
+      "date": "2026-01-01",
+      "note": null,
+      "ts": 1767225600000
+    },
+    {
+      "id": "alqu8p14",
+      "type": "inversion",
+      "cat": "inversion",
+      "sub": null,
+      "detail": null,
+      "amount": 3850,
+      "date": "2026-02-01",
+      "note": null,
+      "ts": 1769904000000
+    },
+    {
+      "id": "zc9e6rvp",
+      "type": "inversion",
+      "cat": "inversion",
+      "sub": null,
+      "detail": null,
+      "amount": 5030.6,
+      "date": "2026-03-01",
+      "note": null,
+      "ts": 1772323200000
+    },
+    {
+      "id": "3sna59qg",
+      "type": "inversion",
+      "cat": "inversion",
+      "sub": null,
+      "detail": null,
+      "amount": 5737,
+      "date": "2026-04-01",
+      "note": null,
+      "ts": 1775001600000
+    },
+    {
+      "id": "alhntlwk",
+      "type": "inversion",
+      "cat": "inversion",
+      "sub": null,
+      "detail": null,
+      "amount": 4513,
+      "date": "2026-05-01",
+      "note": null,
+      "ts": 1777593600000
+    },
+    {
+      "id": "f360794t",
+      "type": "gasto",
+      "cat": "fondo_vera",
+      "sub": null,
+      "detail": null,
+      "amount": 25,
+      "date": "2026-01-01",
+      "note": null,
+      "ts": 1767225600000
+    },
+    {
+      "id": "t6djkf1o",
+      "type": "gasto",
+      "cat": "fondo_vera",
+      "sub": null,
+      "detail": null,
+      "amount": 25,
+      "date": "2026-02-01",
+      "note": null,
+      "ts": 1769904000000
+    },
+    {
+      "id": "1deeo4r0",
+      "type": "gasto",
+      "cat": "fondo_vera",
+      "sub": null,
+      "detail": null,
+      "amount": 25,
+      "date": "2026-03-01",
+      "note": null,
+      "ts": 1772323200000
+    },
+    {
+      "id": "jj964kl7",
+      "type": "gasto",
+      "cat": "fondo_vera",
+      "sub": null,
+      "detail": null,
+      "amount": 25,
+      "date": "2026-04-01",
+      "note": null,
+      "ts": 1775001600000
+    },
+    {
+      "id": "hgcyur00",
+      "type": "gasto",
+      "cat": "fondo_vera",
+      "sub": null,
+      "detail": null,
+      "amount": 25,
+      "date": "2026-05-01",
+      "note": null,
+      "ts": 1777593600000
+    },
+    {
+      "id": "5wyqrvg4",
+      "type": "gasto",
+      "cat": "gastos_comunes",
+      "sub": null,
+      "detail": null,
+      "amount": 1273.93,
+      "date": "2026-01-01",
+      "note": null,
+      "ts": 1767225600000
+    },
+    {
+      "id": "ty7bh1sn",
+      "type": "gasto",
+      "cat": "gastos_comunes",
+      "sub": null,
+      "detail": null,
+      "amount": 1287.84,
+      "date": "2026-02-01",
+      "note": null,
+      "ts": 1769904000000
+    },
+    {
+      "id": "vx2gn7w7",
+      "type": "gasto",
+      "cat": "gastos_comunes",
+      "sub": null,
+      "detail": null,
+      "amount": 1305.35,
+      "date": "2026-03-01",
+      "note": null,
+      "ts": 1772323200000
+    },
+    {
+      "id": "w1mjpzgw",
+      "type": "gasto",
+      "cat": "gastos_comunes",
+      "sub": null,
+      "detail": null,
+      "amount": 1518.37,
+      "date": "2026-04-01",
+      "note": null,
+      "ts": 1775001600000
+    },
+    {
+      "id": "id7zj1sw",
+      "type": "gasto",
+      "cat": "gastos_comunes",
+      "sub": null,
+      "detail": null,
+      "amount": 1765.33,
+      "date": "2026-05-01",
+      "note": null,
+      "ts": 1777593600000
     }
   ],
   "config": {
