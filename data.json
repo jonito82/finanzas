@@ -1957,6 +1957,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781798633231
+    },
+    {
+      "id": "mqjrucj4wqdj",
+      "type": "gasto",
+      "cat": "otros_gasto",
+      "sub": null,
+      "detail": "Aquitania",
+      "amount": 8.15,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781803573744
     }
   ],
   "config": {
