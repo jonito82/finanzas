@@ -2124,301 +2124,492 @@
   "cartera": [
     {
       "ticker": "ABBV",
-      "name": "AbbVie",
+      "nombre": "AbbVie",
       "sector": "Salud",
-      "shares": 9.162862,
+      "acciones": 9.162862,
       "pmc": 177.88,
       "currency": "USD"
     },
     {
       "ticker": "ADP",
-      "name": "Automatic Data Processing",
+      "nombre": "Automatic Data Processing",
       "sector": "Tecnología",
-      "shares": 6.58989,
+      "acciones": 6.058989,
       "pmc": 179.42,
       "currency": "USD"
     },
     {
       "ticker": "AENA",
-      "name": "AENA",
+      "nombre": "AENA",
       "sector": "Industrial",
-      "shares": 59.47926,
+      "acciones": 49.47926,
       "pmc": 23.98,
       "currency": "EUR"
     },
     {
       "ticker": "AMZN",
-      "name": "Amazon",
-      "sector": "Tecnología",
-      "shares": 5.6459,
-      "pmc": 184.29,
+      "nombre": "Amazon",
+      "sector": "C. Discrecional",
+      "acciones": 5.6459,
+      "pmc": 22.9,
       "currency": "USD"
     },
     {
       "ticker": "ARCC",
-      "name": "Ares Capital Corp.",
+      "nombre": "Ares Capital Corporation",
       "sector": "Financiero",
-      "shares": 122.95853,
+      "acciones": 122.95853,
       "pmc": 16.93,
       "currency": "USD"
     },
     {
       "ticker": "ASTS",
-      "name": "AST SpaceMobile",
+      "nombre": "AST Spacemobile",
       "sector": "Comunicación",
-      "shares": 27.208333,
-      "pmc": 22.99,
+      "acciones": 27.208333,
+      "pmc": 22.93,
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "name": "Broadcom",
+      "nombre": "Broadcom",
       "sector": "Tecnología",
-      "shares": 3.77851,
+      "acciones": 3.77851,
       "pmc": 349.87,
       "currency": "USD"
     },
     {
       "ticker": "BAM",
-      "name": "Brookfield Assets M.",
+      "nombre": "Brookfield Assets M.",
       "sector": "Financiero",
-      "shares": 120.16426,
-      "pmc": 41.65,
+      "acciones": 120.16426,
+      "pmc": 42.83,
       "currency": "USD"
     },
     {
       "ticker": "CME",
-      "name": "CME Group",
+      "nombre": "CME",
       "sector": "Financiero",
-      "shares": 3.16387,
+      "acciones": 3.16387,
       "pmc": 235.85,
       "currency": "USD"
     },
     {
       "ticker": "ENG",
-      "name": "Enagás",
-      "sector": "Utilities",
-      "shares": 89.819757,
+      "nombre": "Enagás",
+      "sector": "Energía",
+      "acciones": 89.819757,
       "pmc": 12.17,
       "currency": "EUR"
     },
     {
       "ticker": "GOOG",
-      "name": "Google",
+      "nombre": "Google",
       "sector": "Tecnología",
-      "shares": 5.1482,
+      "acciones": 5.1482,
       "pmc": 154.58,
       "currency": "USD"
     },
     {
       "ticker": "HIMS",
-      "name": "Hims & Hers",
+      "nombre": "Hims & Hers",
       "sector": "Salud",
-      "shares": 43.51157,
+      "acciones": 43.51157,
       "pmc": 22.26,
       "currency": "USD"
     },
     {
       "ticker": "IBE",
-      "name": "Iberdrola",
+      "nombre": "Iberdrola",
       "sector": "Utilities",
-      "shares": 85.8091,
+      "acciones": 85.8091,
       "pmc": 16.81,
       "currency": "EUR"
     },
     {
       "ticker": "ITX",
-      "name": "INDITEX",
+      "nombre": "INDITEX",
       "sector": "C. Discrecional",
-      "shares": 18.02721,
+      "acciones": 18.02721,
       "pmc": 42.83,
       "currency": "EUR"
     },
     {
       "ticker": "JEPQ",
-      "name": "JEPQ ETF",
+      "nombre": "JEPQ",
       "sector": "ETF",
-      "shares": 111.49469,
+      "acciones": 111.49469,
       "pmc": 21.92,
-      "currency": "EUR"
+      "currency": "USD"
     },
     {
       "ticker": "JGPI",
-      "name": "JGPI ETF",
+      "nombre": "JGPI",
       "sector": "ETF",
-      "shares": 106.29025,
+      "acciones": 106.29025,
       "pmc": 23.45,
       "currency": "EUR"
     },
     {
       "ticker": "JNJ",
-      "name": "Johnson & Johnson",
+      "nombre": "Johnson & Johnson",
       "sector": "Salud",
-      "shares": 7.03975,
-      "pmc": 196.11,
+      "acciones": 7.003975,
+      "pmc": 136.11,
       "currency": "USD"
     },
     {
       "ticker": "LLY",
-      "name": "Eli Lilly",
+      "nombre": "Eli Lilly",
       "sector": "Salud",
-      "shares": 0.7313,
+      "acciones": 0.7313,
       "pmc": 842.67,
       "currency": "USD"
     },
     {
       "ticker": "LOG",
-      "name": "Logista",
+      "nombre": "Logista",
       "sector": "Industrial",
-      "shares": 47.0,
-      "pmc": 28.78,
+      "acciones": 47.0,
+      "pmc": 28.58,
       "currency": "EUR"
     },
     {
       "ticker": "MAIN",
-      "name": "MAIN Street Capital",
-      "sector": "REIT",
-      "shares": 63.39966,
+      "nombre": "MAIN",
+      "sector": "Financiero",
+      "acciones": 63.33956,
       "pmc": 46.72,
       "currency": "USD"
     },
     {
       "ticker": "MCD",
-      "name": "McDonald's",
+      "nombre": "McDonalds",
       "sector": "C. Discrecional",
-      "shares": 6.86223,
+      "acciones": 6.86223,
       "pmc": 247.44,
       "currency": "USD"
     },
     {
       "ticker": "META",
-      "name": "META",
+      "nombre": "META",
       "sector": "Tecnología",
-      "shares": 2.00062,
+      "acciones": 2.00062,
       "pmc": 577.31,
       "currency": "USD"
     },
     {
       "ticker": "MSFT",
-      "name": "Microsoft",
+      "nombre": "Microsoft",
       "sector": "Tecnología",
-      "shares": 2.53818,
+      "acciones": 2.53818,
       "pmc": 394.79,
       "currency": "USD"
     },
     {
       "ticker": "NKE",
-      "name": "Nike",
+      "nombre": "Nike",
       "sector": "C. Discrecional",
-      "shares": 27.5,
+      "acciones": 27.5,
       "pmc": 39.13,
       "currency": "USD"
     },
     {
       "ticker": "NOW",
-      "name": "ServiceNow",
+      "nombre": "ServiceNow",
       "sector": "Tecnología",
-      "shares": 20.0,
-      "pmc": 83.36,
+      "acciones": 20.0,
+      "pmc": 49.64,
       "currency": "USD"
     },
     {
       "ticker": "O",
-      "name": "Realty Income",
+      "nombre": "Realty Income",
       "sector": "REIT",
-      "shares": 36.72831,
+      "acciones": 36.72831,
       "pmc": 49.64,
       "currency": "USD"
     },
     {
       "ticker": "PEP",
-      "name": "Pepsi",
+      "nombre": "Pepsi",
       "sector": "Consumo básico",
-      "shares": 12.0,
+      "acciones": 12.0,
       "pmc": 115.37,
       "currency": "USD"
     },
     {
       "ticker": "PG",
-      "name": "Procter & Gamble",
+      "nombre": "Procter & Gamble",
       "sector": "Consumo básico",
-      "shares": 8.64061,
-      "pmc": 126.29,
+      "acciones": 8.04061,
+      "pmc": 162.29,
       "currency": "USD"
     },
     {
       "ticker": "RED",
-      "name": "Redeia",
+      "nombre": "Redeia",
       "sector": "Utilities",
-      "shares": 123.78005,
+      "acciones": 123.78005,
       "pmc": 14.84,
       "currency": "EUR"
     },
     {
       "ticker": "REP",
-      "name": "Repsol",
+      "nombre": "Repsol",
       "sector": "Energía",
-      "shares": 61.0,
-      "pmc": 12.42,
+      "acciones": 61.0,
+      "pmc": 12.08,
       "currency": "EUR"
     },
     {
       "ticker": "RHI",
-      "name": "Robert Half",
-      "sector": "Financiero",
-      "shares": 32.0,
+      "nombre": "Robert Half",
+      "sector": "Industrial",
+      "acciones": 32.0,
       "pmc": 22.95,
       "currency": "USD"
     },
     {
       "ticker": "SOFI",
-      "name": "SoFi Technologies",
+      "nombre": "SoFi",
       "sector": "Financiero",
-      "shares": 90.83158,
+      "acciones": 90.83158,
       "pmc": 14.23,
       "currency": "USD"
     },
     {
       "ticker": "UNH",
-      "name": "UnitedHealth Group",
+      "nombre": "UnitedHealth Group",
       "sector": "Salud",
-      "shares": 3.47862,
+      "acciones": 3.47862,
       "pmc": 305.06,
       "currency": "USD"
     },
     {
       "ticker": "VICI",
-      "name": "VICI Properties",
+      "nombre": "VICI",
       "sector": "REIT",
-      "shares": 24.61,
-      "pmc": 14.23,
+      "acciones": 44.0,
+      "pmc": 22.95,
       "currency": "USD"
     },
     {
       "ticker": "VID",
-      "name": "Vidrala",
+      "nombre": "Vidrala",
       "sector": "Consumo básico",
-      "shares": 51.06088,
+      "acciones": 51.06088,
       "pmc": 79.71,
       "currency": "EUR"
     },
     {
       "ticker": "VIS",
-      "name": "Viscofan",
-      "sector": "Consumo básico",
-      "shares": 51.16555,
-      "pmc": 53.0,
+      "nombre": "Viscofan",
+      "sector": "Industrial",
+      "acciones": 51.16555,
+      "pmc": 39.13,
       "currency": "EUR"
     },
     {
       "ticker": "JEDI",
-      "name": "JEDI ETF",
+      "nombre": "JEDI",
       "sector": "ETF",
-      "shares": 1.6451,
+      "acciones": 1.6451,
       "pmc": 91.8,
-      "currency": "EUR",
-      "yahoo_suffix": ".AS"
+      "currency": "USD"
     }
   ],
-  "cartera_snapshots": []
+  "cartera_snapshots": [
+    {
+      "fecha": "2026-05-31",
+      "cartera": [
+        {
+          "ticker": "ABBV",
+          "acciones": 9.162862,
+          "pmc": 177.88
+        },
+        {
+          "ticker": "ADP",
+          "acciones": 6.058989,
+          "pmc": 179.42
+        },
+        {
+          "ticker": "AENA",
+          "acciones": 49.47926,
+          "pmc": 23.98
+        },
+        {
+          "ticker": "AMZN",
+          "acciones": 5.6459,
+          "pmc": 22.9
+        },
+        {
+          "ticker": "ARCC",
+          "acciones": 122.95853,
+          "pmc": 16.93
+        },
+        {
+          "ticker": "ASTS",
+          "acciones": 27.208333,
+          "pmc": 22.93
+        },
+        {
+          "ticker": "AVGO",
+          "acciones": 3.77851,
+          "pmc": 349.87
+        },
+        {
+          "ticker": "BAM",
+          "acciones": 120.16426,
+          "pmc": 42.83
+        },
+        {
+          "ticker": "CME",
+          "acciones": 3.16387,
+          "pmc": 235.85
+        },
+        {
+          "ticker": "ENG",
+          "acciones": 89.819757,
+          "pmc": 12.17
+        },
+        {
+          "ticker": "GOOG",
+          "acciones": 5.1482,
+          "pmc": 154.58
+        },
+        {
+          "ticker": "HIMS",
+          "acciones": 43.51157,
+          "pmc": 22.26
+        },
+        {
+          "ticker": "IBE",
+          "acciones": 85.8091,
+          "pmc": 16.81
+        },
+        {
+          "ticker": "ITX",
+          "acciones": 18.02721,
+          "pmc": 42.83
+        },
+        {
+          "ticker": "JEPQ",
+          "acciones": 111.49469,
+          "pmc": 21.92
+        },
+        {
+          "ticker": "JGPI",
+          "acciones": 106.29025,
+          "pmc": 23.45
+        },
+        {
+          "ticker": "JNJ",
+          "acciones": 7.003975,
+          "pmc": 136.11
+        },
+        {
+          "ticker": "LLY",
+          "acciones": 0.7313,
+          "pmc": 842.67
+        },
+        {
+          "ticker": "LOG",
+          "acciones": 47.0,
+          "pmc": 28.58
+        },
+        {
+          "ticker": "MAIN",
+          "acciones": 63.33956,
+          "pmc": 46.72
+        },
+        {
+          "ticker": "MCD",
+          "acciones": 6.86223,
+          "pmc": 247.44
+        },
+        {
+          "ticker": "META",
+          "acciones": 2.00062,
+          "pmc": 577.31
+        },
+        {
+          "ticker": "MSFT",
+          "acciones": 2.53818,
+          "pmc": 394.79
+        },
+        {
+          "ticker": "NKE",
+          "acciones": 27.5,
+          "pmc": 39.13
+        },
+        {
+          "ticker": "NOW",
+          "acciones": 20.0,
+          "pmc": 49.64
+        },
+        {
+          "ticker": "O",
+          "acciones": 36.72831,
+          "pmc": 49.64
+        },
+        {
+          "ticker": "PEP",
+          "acciones": 12.0,
+          "pmc": 115.37
+        },
+        {
+          "ticker": "PG",
+          "acciones": 8.04061,
+          "pmc": 162.29
+        },
+        {
+          "ticker": "RED",
+          "acciones": 123.78005,
+          "pmc": 14.84
+        },
+        {
+          "ticker": "REP",
+          "acciones": 61.0,
+          "pmc": 12.08
+        },
+        {
+          "ticker": "RHI",
+          "acciones": 32.0,
+          "pmc": 22.95
+        },
+        {
+          "ticker": "SOFI",
+          "acciones": 90.83158,
+          "pmc": 14.23
+        },
+        {
+          "ticker": "UNH",
+          "acciones": 3.47862,
+          "pmc": 305.06
+        },
+        {
+          "ticker": "VICI",
+          "acciones": 44.0,
+          "pmc": 22.95
+        },
+        {
+          "ticker": "VID",
+          "acciones": 51.06088,
+          "pmc": 79.71
+        },
+        {
+          "ticker": "VIS",
+          "acciones": 51.16555,
+          "pmc": 39.13
+        },
+        {
+          "ticker": "JEDI",
+          "acciones": 1.6451,
+          "pmc": 91.8
+        }
+      ],
+      "total_invertido": 53165.07
+    }
+  ]
 }
