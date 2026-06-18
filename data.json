@@ -252,6 +252,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780439583
+    },
+    {
+      "id": "mqje2rkp0efl",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "O",
+      "amount": 5.91,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780451865
     }
   ],
   "config": {
