@@ -1648,39 +1648,48 @@ function renderCartList(){
   const list=document.getElementById('cartList');
   document.getElementById('cartCount').textContent=DATA.cartera.length;
 
-  let totalVal=0, totalInv=0;
-  DATA.cartera.forEach(p=>{
-    const val=p.acciones*p.pmc;
-    totalVal+=val;
-    totalInv+=val;
-  });
+  const sorted=[...DATA.cartera].sort((a,b)=>(b.acciones*b.pmc)-(a.acciones*a.pmc));
+  const totalInv=DATA.cartera.reduce((s,p)=>s+p.acciones*p.pmc,0);
+  const logoMap={"ABBV": "abbvie.com", "ADP": "adp.com", "AENA": "aena.es", "AMZN": "amazon.com", "ARCC": "arescapital.com", "ASTS": "ast-science.com", "AVGO": "broadcom.com", "BAM": "brookfield.com", "CME": "cmegroup.com", "ENG": "enagas.es", "GOOG": "google.com", "HIMS": "forhims.com", "IBE": "iberdrola.es", "ITX": "inditex.com", "JEPQ": "jpmorgan.com", "JGPI": "jpmorgan.com", "JNJ": "jnj.com", "LLY": "lilly.com", "LOG": "logista.com", "MAIN": "mainstcapital.com", "MCD": "mcdonalds.com", "META": "meta.com", "MSFT": "microsoft.com", "NKE": "nike.com", "NOW": "servicenow.com", "O": "realtyincome.com", "PEP": "pepsico.com", "PG": "pg.com", "RED": "redeia.es", "REP": "repsol.com", "RHI": "rhi.com", "SOFI": "sofi.com", "UNH": "unitedhealthgroup.com", "VICI": "viciproperties.com", "VID": "vidrala.com", "VIS": "viscofan.com", "JEDI": "vaneck.com"};
+  const sectorColors={"Salud": "#30d158", "Tecnolog\u00eda": "#0a84ff", "Industrial": "#ff9f0a", "C. Discrecional": "#ff6b6b", "Financiero": "#5e5ce6", "Utilities": "#64d2ff", "Energ\u00eda": "#ff9500", "REIT": "#ffd60a", "Consumo b\u00e1sico": "#ffe066", "ETF": "#a0a0a0", "Comunicaci\u00f3n": "#ff375f", "Otros": "#888"};
 
-  list.innerHTML=DATA.cartera.map(p=>{
+  list.innerHTML=sorted.map(p=>{
     const inv=p.acciones*p.pmc;
-    const pct=totalVal>0?(inv/totalVal*100):0;
-    const curr=p.currency||'USD';
-    const sym=curr==='EUR'?'€':'$';
-    return `<div class="cart-item">
-      <div class="cart-item-left">
-        <div class="cart-ticker">${p.ticker}</div>
-        <div class="cart-name">${p.nombre}</div>
-        <div class="cart-sector">${p.sector}</div>
+    const pct=totalInv>0?(inv/totalInv*100):0;
+    const sym=p.currency==='EUR'?'€':'$';
+    const domain=logoMap[p.ticker]||'';
+    const logoUrl=domain?`https://logo.clearbit.com/${domain}`:'';
+    const color=sectorColors[p.sector]||'#888';
+    const initials=p.ticker.slice(0,3);
+    return `<div class="cart-row">
+      <div style="width:38px;height:38px;border-radius:10px;background:var(--bg4);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;margin-right:10px;position:relative">
+        ${logoUrl?`<img src="${logoUrl}" width="32" height="32" style="object-fit:contain;border-radius:6px" onerror="this.parentNode.innerHTML='<span style=\"font-size:10px;font-weight:800;color:var(--text2)\">${initials}</span>'">`:`<span style="font-size:10px;font-weight:800;color:var(--text2)">${initials}</span>`}
       </div>
-      <div class="cart-item-right">
-        <div class="cart-val">${sym}${inv.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
-        <div class="cart-shares">${p.acciones.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:4})} acc · PMC ${sym}${p.pmc.toFixed(2)}</div>
-        <div class="cart-pct">${pct.toFixed(1)}% cartera</div>
+      <div class="cart-info">
+        <div style="display:flex;align-items:center;gap:5px;margin-bottom:1px">
+          <span style="font-size:13px;font-weight:700;color:var(--text)">${p.ticker}</span>
+          <span style="font-size:9px;font-weight:600;color:${color};background:${color}22;border-radius:4px;padding:1px 5px;flex-shrink:0">${p.sector}</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:155px">${p.nombre}</div>
+        <div style="font-size:10px;color:var(--text4);margin-top:2px">${p.acciones.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:4})} acc · PMC ${sym}${p.pmc.toFixed(2)}</div>
+      </div>
+      <div class="cart-right">
+        <div style="font-size:14px;font-weight:700;color:var(--text)">${sym}${inv.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:3px">${pct.toFixed(1)}% cartera</div>
       </div>
     </div>`;
   }).join('');
 
-  // Totals
-  const inv_total_el=document.getElementById('cartInvTotal');
-  const val_total_el=document.getElementById('cartValTotal');
-  if(inv_total_el) inv_total_el.textContent=totalInv.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
-  if(val_total_el) val_total_el.textContent=totalVal.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+  // Update header card
+  const fmt=v=>v.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const totalEl=document.getElementById('cartTotal');
+  const invEl=document.getElementById('cartInvertido');
+  const gpEl=document.getElementById('cartGP');
+  if(totalEl) totalEl.textContent=fmt(totalInv)+' €';
+  if(invEl) invEl.textContent=fmt(totalInv)+' €';
+  if(gpEl){ gpEl.textContent='—'; gpEl.style.color='var(--text2)'; }
 
-  renderCartRentabilidad(totalVal, totalInv);
+  renderCartRentabilidad(totalInv, totalInv);
   renderCartSectors();
 }
 
