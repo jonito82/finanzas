@@ -589,9 +589,10 @@ const CATS={
     {id:'ropa',          label:'Ropa',           icon:'👕',color:'#2a1a2a',sub:null,  detail:{label:'Tienda / artículo',ph:'Ej: Zara · camisa azul'}},
     {id:'gasolina',      label:'Gasolina',       icon:'⛽',color:'#2a1f1a',sub:null,  detail:null},
     {id:'peaje',         label:'Peaje',          icon:'🛣️',color:'#1a2a1a',sub:null,  detail:null},
-    {id:'parking',       label:'Parking',        icon:'🅿️',color:'#1a1e2a',sub:null,  detail:null},
+    {id:'parking',       label:'Parking',        icon:'🅿️',color:'#1a1e2a',sub:null,  detail:{label:'¿Dónde?',ph:'Ej: El Corte Inglés, centro...'}},
     {id:'farmacia',      label:'Farmacia',       icon:'💊',color:'#1a2a20',sub:null,  detail:{label:'¿Qué?',ph:'Ej: Frenadol, ibuprofeno...'}},
     {id:'apps',          label:'Apps',           icon:'📱',color:'#1a1f2a',sub:null,  detail:{label:'¿Qué app?',ph:'Ej: Spotify, Netflix'}},
+    {id:'barberia',      label:'Barbería',       icon:'✂️',color:'#1a2a2a',sub:null,  detail:null},
     {id:'sanitas',       label:'Sanitas',        icon:'🏥',color:'#1a1a2e',sub:null,  detail:null},
     {id:'amazon',        label:'Amazon',         icon:'📦',color:'#1f2a1a',sub:null,  detail:{label:'¿Qué compraste?',ph:'Ej: Ghee, auriculares...'}},
     {id:'aliexpress',    label:'Aliexpress',     icon:'🛍️',color:'#2a1a1a',sub:null,  detail:{label:'¿Qué compraste?',ph:'Ej: cable USB, funda...'}},
@@ -692,7 +693,7 @@ function renderHome(){
   const ing=ents.filter(e=>e.type==='ingreso').reduce((s,e)=>s+e.amount,0);
   const gas=ents.filter(e=>e.type==='gasto').reduce((s,e)=>s+e.amount,0);
   const inv=ents.filter(e=>e.type==='inversion').reduce((s,e)=>s+e.amount,0);
-  const net=ing-gas-inv;
+  const net=ing-gas;
   const nEl=document.getElementById('summaryNet');
   nEl.textContent=(net>=0?'+':'')+fmtEurDec(net);
   nEl.className='summary-amount '+(net>=0?'pos':'neg');
@@ -792,7 +793,7 @@ function renderStats(){
   else{const mx=sg[0][1];bgEl.innerHTML=sg.map(([id,tot],i)=>{
     const cd=CATS.gasto.find(c=>c.id===id)||{label:id,icon:'📌',color:'#2a2a2a'};
     const col=CG[i%CG.length];
-    const hasDrill=ents.filter(e=>e.type==='gasto'&&e.cat===id&&(e.sub||e.detail||e.note)).length>0 || ['supermercado','otros_gasto','amazon','aliexpress','el_corte_ingles','farmacia','apps','restaurante','sanbrandan'].includes(id);
+    const hasDrill=ents.filter(e=>e.type==='gasto'&&e.cat===id&&(e.sub||e.detail||e.note)).length>0 || ['supermercado','otros_gasto','amazon','aliexpress','el_corte_ingles','farmacia','apps','restaurante','sanbrandan','parking'].includes(id);
     return`<div class="bd-row" style="cursor:${hasDrill?'pointer':'default'}" onclick="openCatDetail('gasto','${id}')">
       <div class="bd-dot" style="background:${col}"></div>
       <div class="bd-name">${cd.label}</div>
