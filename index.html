@@ -523,7 +523,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
         </div>
         <div class="cart-header">
           <span class="cart-header-lbl">Posiciones (<span id="cartCount">0</span>)</span>
-          <button class="cart-refresh-btn" onclick="loadCartPrices()"><i class="ti ti-refresh" style="font-size:13px"></i> Actualizar</button>
+          <button class="cart-refresh-btn" style="display:none" onclick="loadCartPrices()"><i class="ti ti-refresh" style="font-size:13px"></i> Actualizar</button>
         </div>
         <div class="cart-list" id="cartList"><div class="cart-loading">Cargando precios...</div></div>
         <div class="cart-sector-card">
@@ -819,7 +819,7 @@ const CG=['#ff453a','#ffd60a','#0a84ff','#bf5af2','#E8007D','#ff9f0a','#30d158',
 const CI=['#30d158','#E8007D','#0a84ff','#ffd60a','#bf5af2','#ff9f0a','#64d2ff','#ff453a'];
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
-let DATA={entries:[],patrimonio:[],config:{user:'',repo:'',token:'',meta:40}};
+let DATA={entries:[],patrimonio:[],cartera:[],cartera_snapshots:[],config:{user:'',repo:'',token:'',meta:40}};
 let currentType='gasto',currentCat=null,currentSub=null,currentDetail=null;
 let amountStr='0',currentDate='',editId=null;
 let currentTab='inicio';
@@ -832,6 +832,8 @@ function init(){
   const s=localStorage.getItem('jf_data');
   if(s){try{DATA=JSON.parse(s);}catch(e){}}
   if(!DATA.patrimonio)DATA.patrimonio=[];
+  if(!DATA.cartera)DATA.cartera=[];
+  if(!DATA.cartera_snapshots)DATA.cartera_snapshots=[];
   viewMonth=new Date(); viewMonth.setDate(1);
   currentDate=toISO(new Date());
   document.getElementById('dateInput').value=currentDate;
@@ -1414,6 +1416,7 @@ async function loadFromGitHub(){
     DATA.entries=[...(remote.entries||[]),...localOnly];
     if(remote.patrimonio)DATA.patrimonio=remote.patrimonio;
     if(remote.cartera)DATA.cartera=remote.cartera;
+    if(remote.cartera_snapshots)DATA.cartera_snapshots=remote.cartera_snapshots;
     if(remote.config)DATA.config={...DATA.config,...remote.config,token:DATA.config.token};
     saveLocal(); renderAll(); loadCfgUI();
     setSyncStatus('ok','Sincronizado · '+new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}));
@@ -1636,117 +1639,48 @@ function renderEvolucion(){
 }
 
 // ── CARTERA ───────────────────────────────────────────────────────────────────
-async function loadCartPrices(){
-  if(cartLoading)return;
-  cartLoading=true;
-  const list=document.getElementById('cartList');
-  list.innerHTML='<div class="cart-loading"><i class="ti ti-refresh" style="font-size:20px;color:var(--text3)"></i><div style="margin-top:8px">Cargando precios...</div></div>';
-  if(!DATA.cartera||!DATA.cartera.length){
-    list.innerHTML='<div class="cart-loading">Sin posiciones</div>';
-    cartLoading=false;return;
-  }
-
-  // Helper: fetch via CORS proxy
-  async function yFetch(url){
-    // Try direct first (works in some contexts), then proxy
-    try{
-      const r=await fetch(url,{cache:'no-store'});
-      if(r.ok)return await r.json();
-    }catch(e){}
-    // Fallback: allorigins proxy
-    const proxy=`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-    const r2=await fetch(proxy);
-    return await r2.json();
-  }
-
-  // EUR/USD rate
-  let eurUsd=1.08;
-  try{
-    const j=await yFetch('https://query1.finance.yahoo.com/v8/finance/chart/EURUSD=X?interval=1d&range=1d');
-    eurUsd=j.chart.result[0].meta.regularMarketPrice||1.08;
-  }catch(e){}
-
-  // Map tickers to Yahoo symbols
-  const bmeTickers=['AENA','ENG','IBE','ITX','LOG','RED','REP','VID','VIS'];
-  const londonETFs=['JEPQ','JGPI'];
-  const toYahoo=p=>{
-    if(p.yahoo_suffix)return p.ticker+p.yahoo_suffix;
-    if(p.currency==='EUR'){
-      if(bmeTickers.includes(p.ticker))return p.ticker+'.MC';
-      if(londonETFs.includes(p.ticker))return p.ticker+'.L';
-    }
-    return p.ticker;
-  };
-  const tickers=DATA.cartera.map(toYahoo);
-
-  const allPrices={};
-  // Fetch individual tickers (v8 endpoint, more reliable than v7 multi)
-  const fetches=tickers.map(async(sym,i)=>{
-    try{
-      const url=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1d&range=1d`;
-      const j=await yFetch(url);
-      const meta=j?.chart?.result?.[0]?.meta;
-      if(!meta)return;
-      const price=meta.regularMarketPrice||0;
-      const currency=meta.currency||'USD';
-      const prevClose=meta.previousClose||meta.chartPreviousClose||price;
-      const chgPct=prevClose>0?(price-prevClose)/prevClose*100:0;
-      const origTicker=DATA.cartera[i].ticker;
-      allPrices[origTicker]={price:currency==='EUR'?price:price/eurUsd, raw:price, currency, change:chgPct};
-    }catch(e){}
-  });
-
-  // Run in parallel batches of 5
-  for(let i=0;i<fetches.length;i+=5){
-    await Promise.all(fetches.slice(i,i+5));
-    renderCartList(eurUsd); // Update UI progressively
-  }
-
-  cartPrices=allPrices;
-  renderCartList(eurUsd);
-  cartLoading=false;
+function loadCartPrices(){
+  renderCartList();
 }
 
-function renderCartList(eurUsd){
+function renderCartList(){
   if(!DATA.cartera)return;
   const list=document.getElementById('cartList');
   document.getElementById('cartCount').textContent=DATA.cartera.length;
 
   let totalVal=0, totalInv=0;
-  const rows=DATA.cartera.map(p=>{
-    const priceData=cartPrices[p.ticker]||null; // allPrices siempre indexado por ticker base
-    const curPrice=priceData?priceData.price:null;
-    const val=curPrice!==null?curPrice*p.shares:null;
-    const inv=p.pmc*p.shares;
-    const gp=val!==null?val-inv:null;
-    const gpPct=val!==null&&inv>0?(val-inv)/inv*100:null;
-    if(val)totalVal+=val;
-    totalInv+=inv;
-    const chgCls=gpPct!==null?(gpPct>=0?'pos':'neg'):'';
-    const chgTxt=gpPct!==null?((gpPct>=0?'+':'')+gpPct.toFixed(1)+'%'):(priceData?'—':'⏳');
-    return `<div class="cart-row">
-      <div class="cart-tick">${p.ticker}</div>
-      <div class="cart-info"><div class="cart-name">${p.name}</div>
-      <div class="cart-detail">${p.shares} acc · PMC ${fmtEur(p.pmc)}</div></div>
-      <div class="cart-right"><div class="cart-val">${val!==null?fmtEur(val):'—'}</div>
-      <div class="cart-chg ${chgCls}">${chgTxt}</div></div>
+  DATA.cartera.forEach(p=>{
+    const val=p.acciones*p.pmc;
+    totalVal+=val;
+    totalInv+=val;
+  });
+
+  list.innerHTML=DATA.cartera.map(p=>{
+    const inv=p.acciones*p.pmc;
+    const pct=totalVal>0?(inv/totalVal*100):0;
+    const curr=p.currency||'USD';
+    const sym=curr==='EUR'?'€':'$';
+    return `<div class="cart-item">
+      <div class="cart-item-left">
+        <div class="cart-ticker">${p.ticker}</div>
+        <div class="cart-name">${p.nombre}</div>
+        <div class="cart-sector">${p.sector}</div>
+      </div>
+      <div class="cart-item-right">
+        <div class="cart-val">${sym}${inv.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+        <div class="cart-shares">${p.acciones.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:4})} acc · PMC ${sym}${p.pmc.toFixed(2)}</div>
+        <div class="cart-pct">${pct.toFixed(1)}% cartera</div>
+      </div>
     </div>`;
   }).join('');
 
-  list.innerHTML=rows;
+  // Totals
+  const inv_total_el=document.getElementById('cartInvTotal');
+  const val_total_el=document.getElementById('cartValTotal');
+  if(inv_total_el) inv_total_el.textContent=totalInv.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+  if(val_total_el) val_total_el.textContent=totalVal.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
 
-  // Update header
-  document.getElementById('cartTotal').textContent=totalVal>0?fmtEur(totalVal):'—';
-  document.getElementById('cartInvertido').textContent=fmtEur(totalInv);
-  const gp=totalVal-totalInv;
-  const gpEl=document.getElementById('cartGP');
-  gpEl.textContent=(gp>=0?'+':'')+fmtEur(gp)+' ('+(gp>=0?'+':'')+( totalInv>0?(gp/totalInv*100).toFixed(1):0)+'%)';
-  gpEl.style.color=gp>=0?'var(--green)':'var(--red)';
-
-  // Rentabilidad stats from patrimonio snapshots
   renderCartRentabilidad(totalVal, totalInv);
-
-  // Sectors
   renderCartSectors();
 }
 
@@ -1756,23 +1690,33 @@ function renderCartRentabilidad(curVal, totalInv){
   const now=new Date();
   const yearNow=now.getFullYear();
 
+  // Snaps use 'fecha' field; compute value as sum(acciones*pmc) per snap
+  function snapVal(s){
+    if(s.total_invertido)return s.total_invertido;
+    return(s.cartera||[]).reduce((sum,p)=>sum+p.acciones*p.pmc,0);
+  }
+  const getDate=s=>s.fecha||s.date||'';
   // Last month snap
-  const lastMonth=snaps.filter(s=>s.date<toISO(new Date(now.getFullYear(),now.getMonth(),1))).sort((a,b)=>b.date.localeCompare(a.date))[0];
+  const lastMonth=snaps.filter(s=>getDate(s)<toISO(new Date(now.getFullYear(),now.getMonth(),1))).sort((a,b)=>getDate(b).localeCompare(getDate(a)))[0];
   // First snap of current year (end of last year)
-  const firstOfYear=snaps.filter(s=>s.date.startsWith(yearNow-1)).sort((a,b)=>b.date.localeCompare(a.date))[0];
+  const firstOfYear=snaps.filter(s=>getDate(s).startsWith(String(yearNow-1))).sort((a,b)=>getDate(b).localeCompare(getDate(a)))[0];
   // Very first snap
-  const firstSnap=snaps.sort((a,b)=>a.date.localeCompare(b.date))[0];
+  const firstSnap=[...snaps].sort((a,b)=>getDate(a).localeCompare(getDate(b)))[0];
 
-  function rentHtml(prev,cur){
-    if(!prev||!cur)return'—';
-    const d=cur-prev; const pct=prev>0?d/prev*100:0;
+  function rentHtml(prevVal,cur){
+    if(prevVal==null||!cur)return'—';
+    const d=cur-prevVal; const pct=prevVal>0?d/prevVal*100:0;
     const cls=d>=0?'var(--green)':'var(--red)';
-    return`<span style="color:${cls}">${d>=0?'+':''}${pct.toFixed(1)}%</span>`;
+    const sign=d>=0?'+':'';
+    return`<span style="color:${cls}">${sign}${pct.toFixed(1)}% (${sign}${fmtEur(d)})</span>`;
   }
 
-  document.getElementById('cartRentMes').innerHTML=rentHtml(lastMonth?.value,curVal);
-  document.getElementById('cartRentAnio').innerHTML=rentHtml(firstOfYear?.value,curVal);
-  document.getElementById('cartRentTotal').innerHTML=rentHtml(firstSnap?.value||totalInv,curVal);
+  const elMes=document.getElementById('cartRentMes');
+  const elAnio=document.getElementById('cartRentAnio');
+  const elTotal=document.getElementById('cartRentTotal');
+  if(elMes) elMes.innerHTML=rentHtml(lastMonth?snapVal(lastMonth):null,curVal);
+  if(elAnio) elAnio.innerHTML=rentHtml(firstOfYear?snapVal(firstOfYear):null,curVal);
+  if(elTotal) elTotal.innerHTML=rentHtml(firstSnap?snapVal(firstSnap):totalInv,curVal);
 }
 
 function renderCartSectors(){
@@ -1858,18 +1802,24 @@ function saveCartTrade(){
   saveCartSnapshot();
   saveLocal(); syncToGitHub();
   closeCartTradeSheet();
-  renderCartList(1.08);
+  renderCartList();
   showToast((tradeType==='buy'?'Compra':'Venta')+' registrada ✓');
 }
 function saveCartSnapshot(){
   if(!DATA.cartera_snapshots)DATA.cartera_snapshots=[];
   const today=toISO(new Date());
-  const existing=DATA.cartera_snapshots.findIndex(s=>s.date===today);
-  // Estimate value using PMC as baseline (real prices loaded asynchronously)
-  const val=DATA.cartera.reduce((s,p)=>s+p.pmc*p.shares,0);
-  const snap={date:today,value:val,ts:Date.now()};
+  const existing=DATA.cartera_snapshots.findIndex(s=>(s.fecha||s.date)===today);
+  const total_inv=DATA.cartera.reduce((s,p)=>s+p.acciones*p.pmc,0);
+  const snap={
+    fecha:today,
+    cartera:DATA.cartera.map(p=>({ticker:p.ticker,acciones:p.acciones,pmc:p.pmc})),
+    total_invertido:Math.round(total_inv*100)/100
+  };
   if(existing>=0)DATA.cartera_snapshots[existing]=snap;
   else DATA.cartera_snapshots.push(snap);
+  DATA.cartera_snapshots.sort((a,b)=>(a.fecha||a.date).localeCompare(b.fecha||b.date));
+  saveAndSync();
+  showToast('Snapshot guardado ✓');
 }
 
 function openPatrSheet(){
