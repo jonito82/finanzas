@@ -1975,5 +1975,150 @@
     "repo": "finanzas",
     "meta": 40
   },
-  "patrimonio": []
+  "patrimonio": [
+    {
+      "date": "2024-12-31",
+      "accounts": {
+        "total_only": 14586.05
+      },
+      "total_override": 14586.05,
+      "ts": 0
+    },
+    {
+      "date": "2025-01-31",
+      "accounts": {
+        "total_only": 17909.68
+      },
+      "total_override": 17909.68,
+      "ts": 0
+    },
+    {
+      "date": "2025-02-28",
+      "accounts": {
+        "total_only": 20312.11
+      },
+      "total_override": 20312.11,
+      "ts": 0
+    },
+    {
+      "date": "2025-03-31",
+      "accounts": {
+        "total_only": 21979.94
+      },
+      "total_override": 21979.94,
+      "ts": 0
+    },
+    {
+      "date": "2025-04-30",
+      "accounts": {
+        "total_only": 27036.27
+      },
+      "total_override": 27036.27,
+      "ts": 0
+    },
+    {
+      "date": "2025-05-31",
+      "accounts": {
+        "total_only": 32695.4
+      },
+      "total_override": 32695.4,
+      "ts": 0
+    },
+    {
+      "date": "2025-06-30",
+      "accounts": {
+        "total_only": 36096.09
+      },
+      "total_override": 36096.09,
+      "ts": 0
+    },
+    {
+      "date": "2025-07-31",
+      "accounts": {
+        "total_only": 41535.11
+      },
+      "total_override": 41535.11,
+      "ts": 0
+    },
+    {
+      "date": "2025-08-31",
+      "accounts": {
+        "total_only": 45776.43
+      },
+      "total_override": 45776.43,
+      "ts": 0
+    },
+    {
+      "date": "2025-09-30",
+      "accounts": {
+        "total_only": 44323.52
+      },
+      "total_override": 44323.52,
+      "ts": 0
+    },
+    {
+      "date": "2025-10-31",
+      "accounts": {
+        "total_only": 50246.81
+      },
+      "total_override": 50246.81,
+      "ts": 0
+    },
+    {
+      "date": "2025-11-30",
+      "accounts": {
+        "total_only": 54894.39
+      },
+      "total_override": 54894.39,
+      "ts": 0
+    },
+    {
+      "date": "2025-12-31",
+      "accounts": {
+        "total_only": 59607.64
+      },
+      "total_override": 59607.64,
+      "ts": 0
+    },
+    {
+      "date": "2026-01-31",
+      "accounts": {
+        "total_only": 65402.9
+      },
+      "total_override": 65402.9,
+      "ts": 0
+    },
+    {
+      "date": "2026-02-28",
+      "accounts": {
+        "total_only": 69591.84
+      },
+      "total_override": 69591.84,
+      "ts": 0
+    },
+    {
+      "date": "2026-03-31",
+      "accounts": {
+        "total_only": 73056.75
+      },
+      "total_override": 73056.75,
+      "ts": 0
+    },
+    {
+      "date": "2026-04-30",
+      "accounts": {
+        "total_only": 82603.99
+      },
+      "total_override": 82603.99,
+      "ts": 0
+    },
+    {
+      "date": "2026-05-31",
+      "accounts": {
+        "total_only": 88007.98
+      },
+      "total_override": 88007.98,
+      "ts": 0
+    }
+  ]
 }
