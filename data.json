@@ -175,6 +175,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781779000897
+    },
+    {
+      "id": "mqjd83e9izxa",
+      "type": "ingreso",
+      "cat": "tr",
+      "sub": null,
+      "detail": null,
+      "amount": 13.43,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781779020849
     }
   ],
   "config": {
