@@ -55,7 +55,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
 .scroll::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
 
 /* TABBAR */
-.tabbar{background:var(--bg2);border-top:0.5px solid var(--border);display:flex;align-items:flex-end;padding-bottom:env(safe-area-inset-bottom,0);flex-shrink:0}
+.tabbar{background:var(--bg2);border-top:0.5px solid var(--border);display:flex;align-items:flex-end;padding-bottom:max(env(safe-area-inset-bottom,0px),20px);flex-shrink:0}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 4px;cursor:pointer;border:none;background:none;color:var(--text3);font-size:10px;font-family:inherit}
 .tab i{font-size:22px;color:var(--text3)}
 .tab.active i,.tab.active span{color:var(--pink)}
@@ -664,7 +664,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
     <div class="fab-wrap"><div class="fab" onclick="setTab('add')"><i class="ti ti-plus"></i></div></div>
     <button class="tab" id="tab-hist" onclick="setTab('hist')"><i class="ti ti-list"></i><span>Historial</span></button>
     <button class="tab" id="tab-patr" onclick="setTab('patr')"><i class="ti ti-wallet"></i><span>Patrimonio</span></button>
-    <button class="tab" id="tab-config" onclick="setTab('config')"><i class="ti ti-settings"></i><span>Ajustes</span></button>
   </div>
 </div><!-- /main -->
 </div><!-- /shell -->
@@ -1646,46 +1645,61 @@ async function loadCartPrices(){
     list.innerHTML='<div class="cart-loading">Sin posiciones</div>';
     cartLoading=false;return;
   }
-  // Get EUR/USD rate first
+
+  // Helper: fetch via CORS proxy
+  async function yFetch(url){
+    // Try direct first (works in some contexts), then proxy
+    try{
+      const r=await fetch(url,{cache:'no-store'});
+      if(r.ok)return await r.json();
+    }catch(e){}
+    // Fallback: allorigins proxy
+    const proxy=`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+    const r2=await fetch(proxy);
+    return await r2.json();
+  }
+
+  // EUR/USD rate
   let eurUsd=1.08;
   try{
-    const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/EURUSD=X?interval=1d&range=1d');
-    const j=await r.json();
+    const j=await yFetch('https://query1.finance.yahoo.com/v8/finance/chart/EURUSD=X?interval=1d&range=1d');
     eurUsd=j.chart.result[0].meta.regularMarketPrice||1.08;
   }catch(e){}
 
-  // Batch tickers
-  const tickers=DATA.cartera.map(p=>{
+  // Map tickers to Yahoo symbols
+  const bmeTickers=['AENA','ENG','IBE','ITX','LOG','RED','REP','VID','VIS'];
+  const londonETFs=['JEPQ','JGPI'];
+  const toYahoo=p=>{
     if(p.yahoo_suffix)return p.ticker+p.yahoo_suffix;
     if(p.currency==='EUR'){
-      const bmeTickers=['AENA','ENG','IBE','ITX','LOG','RED','REP','VID','VIS'];
       if(bmeTickers.includes(p.ticker))return p.ticker+'.MC';
-      // EUR ETFs on Euronext London: JEPQ, JGPI
-      const londonETFs=['JEPQ','JGPI'];
       if(londonETFs.includes(p.ticker))return p.ticker+'.L';
-      return p.ticker;
     }
     return p.ticker;
-  });
+  };
+  const tickers=DATA.cartera.map(toYahoo);
 
   const allPrices={};
-  // Fetch in batches of 10
-  for(let i=0;i<tickers.length;i+=10){
-    const batch=tickers.slice(i,i+10);
+  // Fetch individual tickers (v8 endpoint, more reliable than v7 multi)
+  const fetches=tickers.map(async(sym,i)=>{
     try{
-      const sym=batch.join(',');
-      const r=await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${batch[0]}?interval=1d&range=1d`);
-      // Yahoo doesn't support multi-symbol in v8, use v7 quote
-      const r2=await fetch(`https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(sym)}`);
-      const j=await r2.json();
-      const quotes=j.quoteResponse?.result||[];
-      quotes.forEach(q=>{
-        const origTicker=q.symbol.replace('.MC','').replace('.AS','');
-        const price=q.regularMarketPrice||0;
-        const currency=q.currency||'USD';
-        allPrices[origTicker]={price: currency==='EUR'?price:price/eurUsd, raw:price, currency, change:q.regularMarketChangePercent||0};
-      });
+      const url=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1d&range=1d`;
+      const j=await yFetch(url);
+      const meta=j?.chart?.result?.[0]?.meta;
+      if(!meta)return;
+      const price=meta.regularMarketPrice||0;
+      const currency=meta.currency||'USD';
+      const prevClose=meta.previousClose||meta.chartPreviousClose||price;
+      const chgPct=prevClose>0?(price-prevClose)/prevClose*100:0;
+      const origTicker=DATA.cartera[i].ticker;
+      allPrices[origTicker]={price:currency==='EUR'?price:price/eurUsd, raw:price, currency, change:chgPct};
     }catch(e){}
+  });
+
+  // Run in parallel batches of 5
+  for(let i=0;i<fetches.length;i+=5){
+    await Promise.all(fetches.slice(i,i+5));
+    renderCartList(eurUsd); // Update UI progressively
   }
 
   cartPrices=allPrices;
@@ -1700,8 +1714,7 @@ function renderCartList(eurUsd){
 
   let totalVal=0, totalInv=0;
   const rows=DATA.cartera.map(p=>{
-    const yahooSym=p.yahoo_suffix?p.ticker+p.yahoo_suffix:p.ticker;
-    const priceData=cartPrices[yahooSym]||cartPrices[p.ticker]||cartPrices[p.ticker+'.MC']||cartPrices[p.ticker+'.L']||null;
+    const priceData=cartPrices[p.ticker]||null; // allPrices siempre indexado por ticker base
     const curPrice=priceData?priceData.price:null;
     const val=curPrice!==null?curPrice*p.shares:null;
     const inv=p.pmc*p.shares;
