@@ -78,6 +78,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
 /* TRIO */
 .trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px 16px 0}
 .trio-card{background:var(--bg3);border-radius:14px;padding:10px 10px 8px;border:0.5px solid var(--border)}
+.trio-btn{text-align:left;width:100%;cursor:pointer;color:var(--text);font-family:inherit;-webkit-appearance:none;appearance:none}
 .trio-lbl{font-size:10px;color:var(--text3);margin-bottom:3px}
 .trio-val{font-size:15px;font-weight:500}
 
@@ -339,9 +340,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
         <div class="summary-sub" id="summaryDate"></div>
       </div>
       <div class="trio">
-        <div class="trio-card" style="cursor:pointer" onclick="openHomeSummary('ingreso')"><div class="trio-lbl">Ingresos</div><div class="trio-val pos" id="homeIngresos">0 €</div></div>
-        <div class="trio-card" style="cursor:pointer" onclick="openHomeSummary('gasto')"><div class="trio-lbl">Gastos</div><div class="trio-val neg" id="homeGastos">0 €</div></div>
-        <div class="trio-card" style="cursor:pointer" onclick="openHomeSummary('inversion')"><div class="trio-lbl">Invertido</div><div class="trio-val" style="color:var(--blue)" id="homeInvertido">0 €</div></div>
+        <button class="trio-card trio-btn" onclick="openHomeSummary('ingreso')"><div class="trio-lbl">Ingresos</div><div class="trio-val pos" id="homeIngresos">0 €</div></button>
+        <button class="trio-card trio-btn" onclick="openHomeSummary('gasto')"><div class="trio-lbl">Gastos</div><div class="trio-val neg" id="homeGastos">0 €</div></button>
+        <button class="trio-card trio-btn" onclick="openHomeSummary('inversion')"><div class="trio-lbl">Invertido</div><div class="trio-val" style="color:var(--blue)" id="homeInvertido">0 €</div></button>
       </div>
       <div class="home-grid">
         <div class="home-col-left">
