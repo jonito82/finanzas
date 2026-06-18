@@ -32,6 +32,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781777396365
+    },
+    {
+      "id": "mqjcwkkujews",
+      "type": "ingreso",
+      "cat": "atrasos",
+      "sub": null,
+      "detail": null,
+      "amount": 800,
+      "date": "2026-06-01",
+      "note": null,
+      "ts": 1781778483248
     }
   ],
   "config": {
