@@ -593,6 +593,10 @@ const CATS={
     {id:'farmacia',      label:'Farmacia',       icon:'💊',color:'#1a2a20',sub:null,  detail:{label:'¿Qué?',ph:'Ej: Frenadol, ibuprofeno...'}},
     {id:'apps',          label:'Apps',           icon:'📱',color:'#1a1f2a',sub:null,  detail:{label:'¿Qué app?',ph:'Ej: Spotify, Netflix'}},
     {id:'sanitas',       label:'Sanitas',        icon:'🏥',color:'#1a1a2e',sub:null,  detail:null},
+    {id:'amazon',        label:'Amazon',         icon:'📦',color:'#1f2a1a',sub:null,  detail:{label:'¿Qué compraste?',ph:'Ej: Ghee, auriculares...'}},
+    {id:'aliexpress',    label:'Aliexpress',     icon:'🛍️',color:'#2a1a1a',sub:null,  detail:{label:'¿Qué compraste?',ph:'Ej: cable USB, funda...'}},
+    {id:'el_corte_ingles',label:'El Corte Inglés',icon:'🏬',color:'#1a1a2a',sub:null, detail:{label:'¿Qué compraste?',ph:'Ej: Mochila, zapatillas...'}},
+    {id:'sanbrandan',    label:'Sanbrandan',     icon:'🥐',color:'#2a1f10',sub:null,  detail:{label:'¿Qué?',ph:'Ej: pan, bollería...'}},
     {id:'otros_gasto',   label:'Otros',          icon:'📌',color:'#2a2a2a',sub:null,  detail:{label:'¿En qué?',ph:'Describe el gasto'}},
   ],
   ingreso:[
@@ -788,7 +792,7 @@ function renderStats(){
   else{const mx=sg[0][1];bgEl.innerHTML=sg.map(([id,tot],i)=>{
     const cd=CATS.gasto.find(c=>c.id===id)||{label:id,icon:'📌',color:'#2a2a2a'};
     const col=CG[i%CG.length];
-    const hasDrill=ents.filter(e=>e.type==='gasto'&&e.cat===id&&(e.sub||e.detail||e.note)).length>0 || id==='supermercado'||id==='otros_gasto';
+    const hasDrill=ents.filter(e=>e.type==='gasto'&&e.cat===id&&(e.sub||e.detail||e.note)).length>0 || ['supermercado','otros_gasto','amazon','aliexpress','el_corte_ingles','farmacia','apps','restaurante','sanbrandan'].includes(id);
     return`<div class="bd-row" style="cursor:${hasDrill?'pointer':'default'}" onclick="openCatDetail('gasto','${id}')">
       <div class="bd-dot" style="background:${col}"></div>
       <div class="bd-name">${cd.label}</div>
@@ -1198,7 +1202,9 @@ async function loadFromGitHub(){
     if(r.status===404){setSyncStatus('ok','Sin datos remotos aún');return;}
     if(!r.ok)throw new Error('HTTP '+r.status);
     const j=await r.json(); syncSha=j.sha;
-    const remote=JSON.parse(atob(j.content.replace(/\n/g,'')));
+    const b64=j.content.replace(/\n/g,'');
+    const bytes=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+    const remote=JSON.parse(new TextDecoder('utf-8').decode(bytes));
     const remoteIds=new Set((remote.entries||[]).map(e=>e.id));
     const localOnly=DATA.entries.filter(e=>!remoteIds.has(e.id));
     DATA.entries=[...(remote.entries||[]),...localOnly];
