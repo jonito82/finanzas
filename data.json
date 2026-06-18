@@ -1055,17 +1055,6 @@
       "date": "2026-05-01",
       "note": null,
       "ts": 1777593600000
-    },
-    {
-      "id": "vrhdu8up",
-      "type": "ingreso",
-      "cat": "dividendos",
-      "sub": null,
-      "detail": "ARCC",
-      "amount": 5.21,
-      "date": "2026-06-01",
-      "note": null,
-      "ts": 1780272000000
     }
   ],
   "config": {
