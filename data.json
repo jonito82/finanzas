@@ -219,6 +219,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780389782
+    },
+    {
+      "id": "mqje1rz7xx0q",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "JEPQ",
+      "amount": 23.43,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780405731
     }
   ],
   "config": {
