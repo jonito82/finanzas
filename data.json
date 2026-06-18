@@ -120,6 +120,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778908912
+    },
+    {
+      "id": "mqjd61pro3m1",
+      "type": "gasto",
+      "cat": "otros_gasto",
+      "sub": null,
+      "detail": "Cristales Rayban",
+      "amount": 46,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778925359
     }
   ],
   "config": {
