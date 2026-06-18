@@ -10,6 +10,17 @@
       "date": "2026-06-01",
       "note": null,
       "ts": 1781776536276
+    },
+    {
+      "id": "mqjc8x96ltj3",
+      "type": "ingreso",
+      "cat": "pension",
+      "sub": null,
+      "detail": null,
+      "amount": 607.85,
+      "date": "2026-06-01",
+      "note": null,
+      "ts": 1781777379930
     }
   ],
   "config": {
