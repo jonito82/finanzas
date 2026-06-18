@@ -241,6 +241,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780423652
+    },
+    {
+      "id": "mqje2i3jquga",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "Microsoft",
+      "amount": 1.38,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780439583
     }
   ],
   "config": {
