@@ -21,6 +21,17 @@
       "date": "2026-06-01",
       "note": null,
       "ts": 1781777379930
+    },
+    {
+      "id": "mqjc99xpn3i6",
+      "type": "gasto",
+      "cat": "fondo_vera",
+      "sub": null,
+      "detail": null,
+      "amount": 25,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781777396365
     }
   ],
   "config": {
