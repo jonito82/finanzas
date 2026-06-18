@@ -318,6 +318,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780549311
+    },
+    {
+      "id": "mqje5kvwr28t",
+      "type": "ingreso",
+      "cat": "otros_ingreso",
+      "sub": null,
+      "detail": "Monedas",
+      "amount": 856,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780583164
     }
   ],
   "config": {
