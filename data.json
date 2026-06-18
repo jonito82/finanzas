@@ -131,6 +131,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778925359
+    },
+    {
+      "id": "mqjd68yg78lp",
+      "type": "gasto",
+      "cat": "peaje",
+      "sub": null,
+      "detail": null,
+      "amount": 18.15,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778934744
     }
   ],
   "config": {
