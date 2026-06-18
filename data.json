@@ -329,6 +329,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780583164
+    },
+    {
+      "id": "mqje96nz9so7",
+      "type": "ingreso",
+      "cat": "nomina",
+      "sub": null,
+      "detail": null,
+      "amount": 2000,
+      "date": "2026-05-01",
+      "note": null,
+      "ts": 1781780751360
     }
   ],
   "config": {
