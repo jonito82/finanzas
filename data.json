@@ -2125,7 +2125,7 @@
     {
       "ticker": "ABBV",
       "name": "AbbVie",
-      "sector": "Farma",
+      "sector": "Salud",
       "shares": 9.162862,
       "pmc": 177.88,
       "currency": "USD"
@@ -2197,7 +2197,7 @@
     {
       "ticker": "ENG",
       "name": "Enagás",
-      "sector": "Energía",
+      "sector": "Utilities",
       "shares": 89.819757,
       "pmc": 12.17,
       "currency": "EUR"
@@ -2221,7 +2221,7 @@
     {
       "ticker": "IBE",
       "name": "Iberdrola",
-      "sector": "Energía",
+      "sector": "Utilities",
       "shares": 85.8091,
       "pmc": 16.81,
       "currency": "EUR"
@@ -2261,7 +2261,7 @@
     {
       "ticker": "LLY",
       "name": "Eli Lilly",
-      "sector": "Farma",
+      "sector": "Salud",
       "shares": 0.7313,
       "pmc": 842.67,
       "currency": "USD"
@@ -2285,7 +2285,7 @@
     {
       "ticker": "MCD",
       "name": "McDonald's",
-      "sector": "Alimentación",
+      "sector": "C. Discrecional",
       "shares": 6.86223,
       "pmc": 247.44,
       "currency": "USD"
@@ -2309,7 +2309,7 @@
     {
       "ticker": "NKE",
       "name": "Nike",
-      "sector": "Retail",
+      "sector": "C. Discrecional",
       "shares": 27.5,
       "pmc": 39.13,
       "currency": "USD"
@@ -2333,7 +2333,7 @@
     {
       "ticker": "PEP",
       "name": "Pepsi",
-      "sector": "Defensivo",
+      "sector": "Consumo básico",
       "shares": 12.0,
       "pmc": 115.37,
       "currency": "USD"
@@ -2341,7 +2341,7 @@
     {
       "ticker": "PG",
       "name": "Procter & Gamble",
-      "sector": "Consumo",
+      "sector": "Consumo básico",
       "shares": 8.64061,
       "pmc": 126.29,
       "currency": "USD"
@@ -2349,7 +2349,7 @@
     {
       "ticker": "RED",
       "name": "Redeia",
-      "sector": "Energía",
+      "sector": "Utilities",
       "shares": 123.78005,
       "pmc": 14.84,
       "currency": "EUR"
@@ -2397,7 +2397,7 @@
     {
       "ticker": "VID",
       "name": "Vidrala",
-      "sector": "Defensivo",
+      "sector": "Consumo básico",
       "shares": 51.06088,
       "pmc": 79.71,
       "currency": "EUR"
@@ -2405,7 +2405,7 @@
     {
       "ticker": "VIS",
       "name": "Viscofan",
-      "sector": "Defensivo",
+      "sector": "Consumo básico",
       "shares": 51.16555,
       "pmc": 53.0,
       "currency": "EUR"
