@@ -1631,11 +1631,14 @@ async function loadCartPrices(){
 
   // Batch tickers
   const tickers=DATA.cartera.map(p=>{
+    if(p.yahoo_suffix)return p.ticker+p.yahoo_suffix;
     if(p.currency==='EUR'){
-      // Spanish stocks use .MC suffix, ETFs use .AS or no suffix
       const bmeTickers=['AENA','ENG','IBE','ITX','LOG','RED','REP','VID','VIS'];
       if(bmeTickers.includes(p.ticker))return p.ticker+'.MC';
-      return p.ticker; // JEPQ, JGPI, JEDI — try without suffix
+      // EUR ETFs on Euronext London: JEPQ, JGPI
+      const londonETFs=['JEPQ','JGPI'];
+      if(londonETFs.includes(p.ticker))return p.ticker+'.L';
+      return p.ticker;
     }
     return p.ticker;
   });
@@ -1672,7 +1675,8 @@ function renderCartList(eurUsd){
 
   let totalVal=0, totalInv=0;
   const rows=DATA.cartera.map(p=>{
-    const priceData=cartPrices[p.ticker]||cartPrices[p.ticker+'.MC']||null;
+    const yahooSym=p.yahoo_suffix?p.ticker+p.yahoo_suffix:p.ticker;
+    const priceData=cartPrices[yahooSym]||cartPrices[p.ticker]||cartPrices[p.ticker+'.MC']||cartPrices[p.ticker+'.L']||null;
     const curPrice=priceData?priceData.price:null;
     const val=curPrice!==null?curPrice*p.shares:null;
     const inv=p.pmc*p.shares;
