@@ -296,6 +296,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780503648
+    },
+    {
+      "id": "mqje4602zy24",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "LLY",
+      "amount": 0.52,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780517218
     }
   ],
   "config": {
