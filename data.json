@@ -109,6 +109,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778887547
+    },
+    {
+      "id": "mqjd5p0wtb3z",
+      "type": "gasto",
+      "cat": "otros_gasto",
+      "sub": null,
+      "detail": "MJ",
+      "amount": 360.3,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778908912
     }
   ],
   "config": {
