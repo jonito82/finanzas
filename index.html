@@ -339,9 +339,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
         <div class="summary-sub" id="summaryDate"></div>
       </div>
       <div class="trio">
-        <div class="trio-card"><div class="trio-lbl">Ingresos</div><div class="trio-val pos" id="homeIngresos">0 €</div></div>
-        <div class="trio-card"><div class="trio-lbl">Gastos</div><div class="trio-val neg" id="homeGastos">0 €</div></div>
-        <div class="trio-card"><div class="trio-lbl">Invertido</div><div class="trio-val" style="color:var(--blue)" id="homeInvertido">0 €</div></div>
+        <div class="trio-card" style="cursor:pointer" onclick="openHomeSummary('ingreso')"><div class="trio-lbl">Ingresos</div><div class="trio-val pos" id="homeIngresos">0 €</div></div>
+        <div class="trio-card" style="cursor:pointer" onclick="openHomeSummary('gasto')"><div class="trio-lbl">Gastos</div><div class="trio-val neg" id="homeGastos">0 €</div></div>
+        <div class="trio-card" style="cursor:pointer" onclick="openHomeSummary('inversion')"><div class="trio-lbl">Invertido</div><div class="trio-val" style="color:var(--blue)" id="homeInvertido">0 €</div></div>
       </div>
       <div class="home-grid">
         <div class="home-col-left">
@@ -1330,6 +1330,66 @@ function openCatDetail(type, catId){
 function closeCatDetail(e){
   if(e&&e.target!==document.getElementById('catDetailOverlay'))return;
   document.getElementById('catDetailOverlay').classList.remove('visible');
+}
+
+function openHomeSummary(type){
+  const mk=mKey(toISO(viewMonth));
+  const ents=DATA.entries.filter(e=>e.type===type&&mKey(e.date)===mk);
+  const total=ents.reduce((s,e)=>s+e.amount,0);
+  const sign=type==='ingreso'?'+':type==='inversion'?'':'-';
+  const col=type==='ingreso'?'var(--green)':type==='inversion'?'var(--blue)':'var(--red)';
+  const titles={ingreso:'Ingresos',gasto:'Gastos',inversion:'Invertido'};
+  const icons={ingreso:'💰',gasto:'💸',inversion:'📊'};
+  const colors={ingreso:'#1a2e1a',gasto:'#2e1a1a',inversion:'#1a1f2e'};
+
+  document.getElementById('catDetailIcon').textContent=icons[type];
+  document.getElementById('catDetailIcon').style.background=colors[type];
+  document.getElementById('catDetailTitle').textContent=titles[type];
+  document.getElementById('catDetailTotal').innerHTML=
+    `<span style="color:${col};font-weight:500">${sign}${fmtEur(total)}</span>`+
+    ` · ${ents.length} movimiento${ents.length!==1?'s':''}`;
+
+  // Group by category
+  const groups={};
+  ents.forEach(e=>{
+    const key=e.cat;
+    if(!groups[key]) groups[key]={amount:0,count:0,entries:[]};
+    groups[key].amount+=e.amount;
+    groups[key].count++;
+    groups[key].entries.push(e);
+  });
+
+  const cats=CATS[type]||[];
+  const sorted=Object.entries(groups).sort((a,b)=>b[1].amount-a[1].amount);
+  const maxA=sorted.length?sorted[0][1].amount:1;
+  const palette=type==='ingreso'?CI:type==='inversion'?['var(--blue)']:CG;
+
+  const listEl=document.getElementById('catDetailList');
+  if(!sorted.length){
+    listEl.innerHTML='<div class="empty" style="padding:24px 0"><div class="empty-text">Sin movimientos este mes</div></div>';
+  } else {
+    listEl.innerHTML=sorted.map(([catId,g],i)=>{
+      const cd=cats.find(c=>c.id===catId)||{label:catId,icon:'📌',color:'#2a2a2a'};
+      const pct=total>0?Math.round(g.amount/total*100):0;
+      const barW=Math.round(g.amount/maxA*100);
+      const accentCol=palette[i%palette.length];
+      // Sub-entries detail
+      const subLabels=[...new Set(g.entries.map(e=>[e.sub,e.detail].filter(Boolean).join(' · ')).filter(Boolean))];
+      const subTxt=subLabels.length?subLabels.join(', '):'';
+      return`<div class="cdd-row">
+        <div style="flex:1;min-width:0">
+          <div class="cdd-label">${cd.icon} ${cd.label}</div>
+          ${subTxt?`<div class="cdd-sub">${subTxt}</div>`:''}
+          <div style="margin-top:5px"><div class="cdd-bar-bg" style="width:100%"><div class="cdd-bar-f" style="width:${barW}%;background:${accentCol}"></div></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;margin-left:10px">
+          <div class="cdd-amt" style="color:${accentCol}">${sign}${fmtEur(g.amount)}</div>
+          <div style="font-size:11px;color:var(--text4)">${pct}% · ${g.count} vez${g.count!==1?'es':''}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('catDetailOverlay').classList.add('visible');
 }
 
 
