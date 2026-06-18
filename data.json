@@ -1,5 +1,17 @@
 {
-  "entries": [],
+  "entries": [
+    {
+      "id": "mqjbquacq7o9",
+      "type": "ingreso",
+      "cat": "nomina",
+      "sub": null,
+      "detail": null,
+      "amount": 2000,
+      "date": "2026-06-01",
+      "note": null,
+      "ts": 1781776536276
+    }
+  ],
   "config": {
     "user": "jonito82",
     "repo": "finanzas",
