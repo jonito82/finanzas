@@ -285,6 +285,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780490267
+    },
+    {
+      "id": "mqje3vj4youm",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "MCD",
+      "amount": 6.63,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780503648
     }
   ],
   "config": {
