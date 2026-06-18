@@ -76,6 +76,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778825879
+    },
+    {
+      "id": "mqjd4b8rs22s",
+      "type": "gasto",
+      "cat": "ropa",
+      "sub": null,
+      "detail": "Vinted - Chaqueta Adidas",
+      "amount": 37.65,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778844395
     }
   ],
   "config": {
