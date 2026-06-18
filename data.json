@@ -87,6 +87,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778844395
+    },
+    {
+      "id": "mqjd4yk1atlr",
+      "type": "gasto",
+      "cat": "supermercado",
+      "sub": "Lidl",
+      "detail": null,
+      "amount": 12.11,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778874609
     }
   ],
   "config": {
