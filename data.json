@@ -142,6 +142,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778934744
+    },
+    {
+      "id": "mqjd7737fd7e",
+      "type": "ingreso",
+      "cat": "box_oficial",
+      "sub": null,
+      "detail": null,
+      "amount": 1200,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778978979
     }
   ],
   "config": {
