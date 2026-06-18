@@ -98,6 +98,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778874609
+    },
+    {
+      "id": "mqjd58jful7c",
+      "type": "gasto",
+      "cat": "otros_gasto",
+      "sub": null,
+      "detail": "Zava",
+      "amount": 25,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778887547
     }
   ],
   "config": {
