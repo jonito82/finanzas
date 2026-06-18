@@ -65,6 +65,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778800711
+    },
+    {
+      "id": "mqjd3wyfphit",
+      "type": "gasto",
+      "cat": "otros_gasto",
+      "sub": null,
+      "detail": "Amazon Prime",
+      "amount": 50,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778825879
     }
   ],
   "config": {
