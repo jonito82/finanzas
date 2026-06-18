@@ -1935,6 +1935,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781740800000
+    },
+    {
+      "id": "z9dp8a1s",
+      "type": "ingreso",
+      "cat": "box_oficial",
+      "sub": null,
+      "detail": null,
+      "amount": 2658.0,
+      "date": "2026-05-01",
+      "note": null,
+      "ts": 1746057600000
     }
   ],
   "config": {
