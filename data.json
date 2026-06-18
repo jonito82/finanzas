@@ -197,6 +197,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781779062195
+    },
+    {
+      "id": "mqjd9add2k8k",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "Google",
+      "amount": 0.68,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781779076545
     }
   ],
   "config": {
