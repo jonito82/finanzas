@@ -230,6 +230,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780405731
+    },
+    {
+      "id": "mqje25t0ie1h",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "JGPI",
+      "amount": 23.99,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780423652
     }
   ],
   "config": {
