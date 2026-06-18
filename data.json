@@ -2416,7 +2416,8 @@
       "sector": "ETF",
       "shares": 1.6451,
       "pmc": 91.8,
-      "currency": "EUR"
+      "currency": "EUR",
+      "yahoo_suffix": ".AS"
     }
   ],
   "cartera_snapshots": []
