@@ -307,6 +307,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781780517218
+    },
+    {
+      "id": "mqje4urj1hhv",
+      "type": "inversion",
+      "cat": "inversion",
+      "sub": null,
+      "detail": "DCA",
+      "amount": 1800,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781780549311
     }
   ],
   "config": {
