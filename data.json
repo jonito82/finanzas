@@ -186,6 +186,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781779020849
+    },
+    {
+      "id": "mqjd8zarqco4",
+      "type": "ingreso",
+      "cat": "dividendos",
+      "sub": null,
+      "detail": "JNJ",
+      "amount": 5.21,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781779062195
     }
   ],
   "config": {
