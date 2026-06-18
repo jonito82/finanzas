@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Finanzas">
@@ -287,6 +287,50 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
   .period-tabs{margin:14px 24px}
   .sect-title{font-size:16px}
 }
+
+/* ── PATRIMONIO ─────────────────────────────────────────────────────────── */
+.patr-total-card{background:var(--bg3);border-radius:18px;padding:20px 16px;margin:12px 12px 0;border:0.5px solid var(--border)}
+.patr-total-lbl{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.patr-total-amt{font-size:34px;font-weight:700;letter-spacing:-.02em;color:var(--green)}
+.patr-total-sub{font-size:12px;color:var(--text4);margin-top:4px}
+.patr-accounts{margin:10px 12px 0;display:flex;flex-direction:column;gap:8px}
+.patr-account-card{background:var(--bg3);border-radius:14px;padding:14px;border:0.5px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.patr-account-card:active{opacity:.7}
+.patr-acc-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.patr-acc-info{flex:1;min-width:0}
+.patr-acc-name{font-size:14px;font-weight:600;color:var(--text)}
+.patr-acc-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.patr-acc-amt{font-size:16px;font-weight:700;color:var(--text);flex-shrink:0}
+.patr-acc-pct{font-size:10px;color:var(--text4);text-align:right;margin-top:2px}
+.patr-chart-card{background:var(--bg3);border-radius:18px;margin:10px 12px 0;padding:16px;border:0.5px solid var(--border)}
+.patr-chart-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px}
+.patr-chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.patr-chart{display:flex;align-items:flex-end;gap:6px;min-height:80px;padding:0 4px}
+.patr-bar-grp{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;width:36px}
+.patr-bar{border-radius:5px 5px 0 0;background:var(--green);width:28px;min-height:3px;transition:height .3s}
+.patr-bar-lbl{font-size:9px;color:var(--text4);text-align:center;white-space:nowrap}
+.patr-bar-val{font-size:8px;color:var(--text3);text-align:center;white-space:nowrap}
+.patr-btn-add{margin:10px 12px 0;background:var(--green);border:none;border-radius:14px;padding:15px;width:calc(100% - 24px);color:#fff;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
+.patr-btn-add:active{opacity:.8}
+.patr-hist-card{background:var(--bg3);border-radius:18px;margin:10px 12px 0;padding:16px;border:0.5px solid var(--border)}
+.patr-hist-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px}
+.patr-hist-row{display:flex;align-items:center;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.patr-hist-row:last-child{border-bottom:none}
+.patr-hist-date{font-size:12px;color:var(--text3);width:80px;flex-shrink:0}
+.patr-hist-amt{font-size:15px;font-weight:600;color:var(--text);flex:1}
+.patr-hist-delta{font-size:12px;font-weight:600;text-align:right}
+.patr-hist-delta.pos{color:var(--green)}
+.patr-hist-delta.neg{color:var(--red)}
+/* Patrimonio entry sheet */
+.patr-fields{padding:8px 16px}
+.patr-field-row{display:flex;align-items:center;padding:12px 0;border-bottom:0.5px solid var(--border)}
+.patr-field-row:last-child{border-bottom:none}
+.patr-field-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-right:12px;flex-shrink:0}
+.patr-field-lbl{flex:1;font-size:14px;color:var(--text2)}
+.patr-field-input{background:var(--bg4);border:none;border-radius:8px;padding:8px 10px;font-size:15px;color:var(--text);font-family:inherit;text-align:right;width:130px;-webkit-appearance:none;appearance:none}
+.patr-field-input:focus{outline:2px solid var(--green)}
+.patr-save-btn{margin:16px;background:var(--green);border:none;border-radius:14px;padding:15px;width:calc(100% - 32px);color:#fff;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer}
+
 </style>
 </head>
 <body>
@@ -391,6 +435,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
       </div>
       <div class="breakdown-card"><div class="bd-title">Gastos por categoría</div><div id="bdGastos"><div class="empty" style="padding:12px 0"><div class="empty-text">Sin datos</div></div></div></div>
       <div class="breakdown-card" style="margin-bottom:0"><div class="bd-title">Ingresos por origen</div><div id="bdIngresos"><div class="empty" style="padding:12px 0"><div class="empty-text">Sin datos</div></div></div></div>
+      <div style="height:16px"></div>
+    </div>
+
+
+    <!-- PATRIMONIO -->
+    <div class="screen" id="screen-patr">
+      <!-- Total card -->
+      <div class="patr-total-card">
+        <div class="patr-total-lbl">Patrimonio total</div>
+        <div class="patr-total-amt" id="patrTotal">— €</div>
+        <div class="patr-total-sub" id="patrTotalSub">Sin datos aún</div>
+      </div>
+      <!-- Account cards -->
+      <div class="patr-accounts" id="patrAccounts"></div>
+      <!-- Evolución chart -->
+      <div class="patr-chart-card">
+        <div class="patr-chart-title">Evolución del patrimonio</div>
+        <div class="patr-chart-wrap"><div class="patr-chart" id="patrChart"></div></div>
+      </div>
+      <!-- Add button -->
+      <button class="patr-btn-add" onclick="openPatrSheet()"><i class="ti ti-plus"></i> Registrar mes actual</button>
+      <!-- History -->
+      <div class="patr-hist-card" id="patrHistCard" style="display:none">
+        <div class="patr-hist-title">Histórico mensual</div>
+        <div id="patrHistList"></div>
+      </div>
       <div style="height:16px"></div>
     </div>
 
@@ -503,6 +573,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
     <button class="tab" id="tab-stats" onclick="setTab('stats')"><i class="ti ti-chart-bar"></i><span>Stats</span></button>
     <div class="fab-wrap"><div class="fab" onclick="setTab('add')"><i class="ti ti-plus"></i></div></div>
     <button class="tab" id="tab-hist" onclick="setTab('hist')"><i class="ti ti-list"></i><span>Historial</span></button>
+    <button class="tab" id="tab-patr" onclick="setTab('patr')"><i class="ti ti-wallet"></i><span>Patrimonio</span></button>
     <button class="tab" id="tab-config" onclick="setTab('config')"><i class="ti ti-settings"></i><span>Ajustes</span></button>
   </div>
 </div><!-- /main -->
@@ -619,7 +690,7 @@ const CG=['#ff453a','#ffd60a','#0a84ff','#bf5af2','#E8007D','#ff9f0a','#30d158',
 const CI=['#30d158','#E8007D','#0a84ff','#ffd60a','#bf5af2','#ff9f0a','#64d2ff','#ff453a'];
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
-let DATA={entries:[],config:{user:'',repo:'',token:'',meta:40}};
+let DATA={entries:[],patrimonio:[],config:{user:'',repo:'',token:'',meta:40}};
 let currentType='gasto',currentCat=null,currentSub=null,currentDetail=null;
 let amountStr='0',currentDate='',editId=null;
 let currentTab='inicio';
@@ -631,6 +702,7 @@ let sheetCb=null,sheetItemsArr=[],textSheetCb=null,confirmCb=null,syncSha=null;
 function init(){
   const s=localStorage.getItem('jf_data');
   if(s){try{DATA=JSON.parse(s);}catch(e){}}
+  if(!DATA.patrimonio)DATA.patrimonio=[];
   viewMonth=new Date(); viewMonth.setDate(1);
   currentDate=toISO(new Date());
   document.getElementById('dateInput').value=currentDate;
@@ -647,7 +719,7 @@ function toISO(d){return d.toISOString().split('T')[0];}
 function fmtEur(n){return (n||0).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';}
 function fmtEurDec(n){return (n||0).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';}
 function mKey(d){return d.slice(0,7);}
-function saveLocal(){localStorage.setItem('jf_data',JSON.stringify(DATA));}
+function saveLocal(){if(!DATA.patrimonio)DATA.patrimonio=[];localStorage.setItem('jf_data',JSON.stringify(DATA));}
 function fmtDate(d){
   const t=toISO(new Date()),y=toISO(new Date(Date.now()-86400000));
   if(d===t)return'Hoy'; if(d===y)return'Ayer';
@@ -671,11 +743,12 @@ function setTab(t){
   if(t==='inicio')renderHome();
   else if(t==='stats')renderStats();
   else if(t==='hist')renderHistory();
+  else if(t==='patr')renderPatrimonio();
   else if(t==='add'){resetForm();setTimeout(()=>wireKeyboardInput(document.getElementById('amountRealInput')),80);}
 }
 
 function updateNavBar(){
-  const titles={inicio:'Mis finanzas',stats:'Estadísticas',add:'Nuevo movimiento',hist:'Historial',config:'Ajustes'};
+  const titles={inicio:'Mis finanzas',stats:'Estadísticas',add:'Nuevo movimiento',hist:'Historial',patr:'Patrimonio',config:'Ajustes'};
   document.getElementById('navTitle').textContent=titles[currentTab]||'';
   const mk=viewMonth.toLocaleDateString('es-ES',{month:'long',year:'numeric'});
   document.getElementById('navSub').textContent=currentTab==='inicio'?mk:'';
@@ -1210,6 +1283,7 @@ async function loadFromGitHub(){
     const remoteIds=new Set((remote.entries||[]).map(e=>e.id));
     const localOnly=DATA.entries.filter(e=>!remoteIds.has(e.id));
     DATA.entries=[...(remote.entries||[]),...localOnly];
+    if(remote.patrimonio)DATA.patrimonio=remote.patrimonio;
     if(remote.config)DATA.config={...DATA.config,...remote.config,token:DATA.config.token};
     saveLocal(); renderAll(); loadCfgUI();
     setSyncStatus('ok','Sincronizado · '+new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}));
@@ -1219,7 +1293,7 @@ async function syncToGitHub(){
   const{user,repo,token}=DATA.config; if(!user||!repo||!token)return;
   setSyncStatus('pending','Guardando...');
   try{
-    const payload={entries:DATA.entries,config:{...DATA.config,token:undefined}};
+    const payload={entries:DATA.entries,patrimonio:DATA.patrimonio||[],config:{...DATA.config,token:undefined}};
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2))));
     const body={message:'update',content}; if(syncSha)body.sha=syncSha;
     const r=await fetch(`https://api.github.com/repos/${user}/${repo}/contents/data.json`,{
@@ -1235,6 +1309,155 @@ async function syncToGitHub(){
     else setSyncStatus('error','Error: '+e.message);
   }
 }
+
+// ── PATRIMONIO ─────────────────────────────────────────────────────────────
+const PATR_ACCOUNTS = [
+  {id:'santander', label:'Banco Santander', icon:'🏦', bg:'#1a2e1a'},
+  {id:'tr',        label:'Trade Republic',  icon:'💰', bg:'#1a1f2e'},
+  {id:'sp500',     label:'Fondo S&P500',    icon:'📈', bg:'#1a2a1a'},
+  {id:'pension',   label:'Plan de pensiones',icon:'🏛️',bg:'#2a1a2e'},
+  {id:'cartera',   label:'Cartera de valores',icon:'📊',bg:'#2e1a1a'},
+];
+
+function renderPatrimonio(){
+  if(!DATA.patrimonio)DATA.patrimonio=[];
+  const recs=[...DATA.patrimonio].sort((a,b)=>b.date.localeCompare(a.date));
+  const latest=recs[0]||null;
+
+  // Total
+  const total=latest?Object.values(latest.accounts).reduce((s,v)=>s+(v||0),0):0;
+  document.getElementById('patrTotal').textContent = latest ? fmtEur(total) : '— €';
+  if(latest){
+    const prev=recs[1]||null;
+    const prevTotal=prev?Object.values(prev.accounts).reduce((s,v)=>s+(v||0),0):null;
+    const delta=prevTotal!==null?total-prevTotal:null;
+    const dateStr=new Date(latest.date+'T00:00').toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
+    let subTxt='Último registro: '+dateStr;
+    if(delta!==null){
+      const sign=delta>=0?'+':'';
+      subTxt+=' · '+sign+fmtEur(delta)+' vs. mes anterior';
+    }
+    document.getElementById('patrTotalSub').textContent=subTxt;
+  }else{
+    document.getElementById('patrTotalSub').textContent='Pulsa "Registrar mes actual" para empezar';
+  }
+
+  // Account cards
+  const acc=document.getElementById('patrAccounts'); acc.innerHTML='';
+  PATR_ACCOUNTS.forEach(a=>{
+    const val=latest?(latest.accounts[a.id]||0):null;
+    const pct=total>0&&val!==null?Math.round(val/total*100):null;
+    const div=document.createElement('div'); div.className='patr-account-card';
+    div.innerHTML=`<div class="patr-acc-icon" style="background:${a.bg}">${a.icon}</div>
+      <div class="patr-acc-info"><div class="patr-acc-name">${a.label}</div>
+      <div class="patr-acc-sub">${pct!==null?pct+'% del total':'Sin datos'}</div></div>
+      <div style="text-align:right"><div class="patr-acc-amt">${val!==null?fmtEur(val):'—'}</div></div>`;
+    acc.appendChild(div);
+  });
+
+  // Chart — last 12 records
+  const chartRecs=[...recs].reverse().slice(-12);
+  const ch=document.getElementById('patrChart'); ch.innerHTML='';
+  if(chartRecs.length>0){
+    const totals=chartRecs.map(r=>Object.values(r.accounts).reduce((s,v)=>s+(v||0),0));
+    const mx=Math.max(...totals,1);
+    chartRecs.forEach((r,i)=>{
+      const t=totals[i];
+      const h=Math.max(4,Math.round(t/mx*72));
+      const lbl=new Date(r.date+'T00:00').toLocaleDateString('es-ES',{month:'short'}).replace('.','');
+      const valK=t>=1000?(Math.round(t/100)/10)+'K':Math.round(t)+'';
+      const grp=document.createElement('div'); grp.className='patr-bar-grp';
+      grp.innerHTML=`<div class="patr-bar-val">${valK}</div><div class="patr-bar" style="height:${h}px"></div><div class="patr-bar-lbl">${lbl}</div>`;
+      ch.appendChild(grp);
+    });
+  }else{
+    ch.innerHTML='<div style="color:var(--text4);font-size:13px;margin:auto">Sin datos aún</div>';
+  }
+
+  // History list
+  const hCard=document.getElementById('patrHistCard');
+  const hList=document.getElementById('patrHistList');
+  if(recs.length>0){
+    hCard.style.display='block';
+    hList.innerHTML=recs.map((r,i)=>{
+      const t=Object.values(r.accounts).reduce((s,v)=>s+(v||0),0);
+      const prev=recs[i+1]||null;
+      const prevT=prev?Object.values(prev.accounts).reduce((s,v)=>s+(v||0),0):null;
+      const delta=prevT!==null?t-prevT:null;
+      const dateStr=new Date(r.date+'T00:00').toLocaleDateString('es-ES',{month:'short',year:'numeric'});
+      let deltaHtml='';
+      if(delta!==null){
+        const sign=delta>=0?'+':''; const cls=delta>=0?'pos':'neg';
+        deltaHtml=`<div class="patr-hist-delta ${cls}">${sign}${fmtEur(delta)}</div>`;
+      }
+      return`<div class="patr-hist-row"><div class="patr-hist-date">${dateStr}</div><div class="patr-hist-amt">${fmtEur(t)}</div>${deltaHtml}</div>`;
+    }).join('');
+  }else{
+    hCard.style.display='none';
+  }
+}
+
+function openPatrSheet(){
+  if(!DATA.patrimonio)DATA.patrimonio=[];
+  // Determine date: last day of current month
+  const now=new Date();
+  const lastDay=new Date(now.getFullYear(),now.getMonth()+1,0);
+  const dateStr=toISO(lastDay);
+  // Find existing record for this month
+  const mk=dateStr.slice(0,7);
+  const existing=DATA.patrimonio.find(r=>r.date.slice(0,7)===mk);
+  // Set date label
+  document.getElementById('patrSheetDateLbl').textContent='Mes: '+lastDay.toLocaleDateString('es-ES',{month:'long',year:'numeric'});
+  // Fill inputs
+  PATR_ACCOUNTS.forEach(a=>{
+    const inp=document.getElementById('pf-'+a.id);
+    inp.value=existing?(existing.accounts[a.id]||''):'';
+  });
+  updatePatrSheetTotal();
+  // Wire input events
+  PATR_ACCOUNTS.forEach(a=>{
+    document.getElementById('pf-'+a.id).oninput=updatePatrSheetTotal;
+  });
+  document.getElementById('patrSheetOverlay').style.display='flex';
+  setTimeout(()=>{document.getElementById('patrSheetOverlay').style.opacity='1';},10);
+}
+
+function updatePatrSheetTotal(){
+  let t=0;
+  PATR_ACCOUNTS.forEach(a=>{
+    const v=parseFloat(document.getElementById('pf-'+a.id).value)||0;
+    t+=v;
+  });
+  document.getElementById('patrSheetTotal').textContent=fmtEur(t);
+}
+
+function closePatrSheet(e){
+  if(e&&e.target!==document.getElementById('patrSheetOverlay'))return;
+  document.getElementById('patrSheetOverlay').style.display='none';
+}
+
+function savePatrimonio(){
+  if(!DATA.patrimonio)DATA.patrimonio=[];
+  const now=new Date();
+  const lastDay=new Date(now.getFullYear(),now.getMonth()+1,0);
+  const dateStr=toISO(lastDay);
+  const mk=dateStr.slice(0,7);
+  const accounts={};
+  PATR_ACCOUNTS.forEach(a=>{
+    accounts[a.id]=parseFloat(document.getElementById('pf-'+a.id).value)||0;
+  });
+  // Upsert
+  const idx=DATA.patrimonio.findIndex(r=>r.date.slice(0,7)===mk);
+  const record={date:dateStr,accounts,ts:Date.now()};
+  if(idx>=0)DATA.patrimonio[idx]=record;
+  else DATA.patrimonio.push(record);
+  saveLocal();
+  syncToGitHub();
+  closePatrSheet();
+  renderPatrimonio();
+  showToast('Patrimonio guardado ✓');
+}
+
 function syncNow(){loadFromGitHub();}
 
 // ── TOAST ─────────────────────────────────────────────────────────────────────
@@ -1398,9 +1621,53 @@ function renderAll(){
   renderHome();
   if(currentTab==='stats')renderStats();
   if(currentTab==='hist')renderHistory();
+  if(currentTab==='patr')renderPatrimonio();
 }
 
 init();
 </script>
+
+<!-- PATRIMONIO SHEET -->
+<div class="sheet-overlay" id="patrSheetOverlay" onclick="closePatrSheet(event)">
+  <div class="sheet" style="max-height:85vh">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Registrar patrimonio</div>
+    <div style="padding:0 16px 4px;font-size:12px;color:var(--text3)" id="patrSheetDateLbl"></div>
+    <div class="patr-fields">
+      <div class="patr-field-row">
+        <div class="patr-field-icon" style="background:#1a2e1a">🏦</div>
+        <div class="patr-field-lbl">Banco Santander</div>
+        <input class="patr-field-input" id="pf-santander" type="number" inputmode="decimal" placeholder="0,00" step="0.01" min="0">
+      </div>
+      <div class="patr-field-row">
+        <div class="patr-field-icon" style="background:#1a1f2e">💰</div>
+        <div class="patr-field-lbl">Trade Republic</div>
+        <input class="patr-field-input" id="pf-tr" type="number" inputmode="decimal" placeholder="0,00" step="0.01" min="0">
+      </div>
+      <div class="patr-field-row">
+        <div class="patr-field-icon" style="background:#1a2a1a">📈</div>
+        <div class="patr-field-lbl">Fondo S&P500</div>
+        <input class="patr-field-input" id="pf-sp500" type="number" inputmode="decimal" placeholder="0,00" step="0.01" min="0">
+      </div>
+      <div class="patr-field-row">
+        <div class="patr-field-icon" style="background:#2a1a2e">🏛️</div>
+        <div class="patr-field-lbl">Plan de pensiones</div>
+        <input class="patr-field-input" id="pf-pension" type="number" inputmode="decimal" placeholder="0,00" step="0.01" min="0">
+      </div>
+      <div class="patr-field-row">
+        <div class="patr-field-icon" style="background:#2e1a1a">📊</div>
+        <div class="patr-field-lbl">Cartera de valores</div>
+        <input class="patr-field-input" id="pf-cartera" type="number" inputmode="decimal" placeholder="0,00" step="0.01" min="0">
+      </div>
+    </div>
+    <div style="padding:0 16px 4px;font-size:13px;color:var(--text2);display:flex;justify-content:space-between;align-items:center">
+      <span>Total calculado</span>
+      <span id="patrSheetTotal" style="font-weight:700;color:var(--green)">0,00 €</span>
+    </div>
+    <button class="patr-save-btn" onclick="savePatrimonio()">Guardar</button>
+    <button class="sheet-cancel" onclick="closePatrSheet()">Cancelar</button>
+  </div>
+</div>
+
 </body>
 </html>
