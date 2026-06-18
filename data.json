@@ -1323,9 +1323,9 @@
     {
       "id": "wz6ra4wq",
       "type": "gasto",
-      "cat": "otros_gasto",
+      "cat": "barberia",
       "sub": null,
-      "detail": "Barbería",
+      "detail": null,
       "amount": 19.0,
       "date": "2026-05-01",
       "note": null,
