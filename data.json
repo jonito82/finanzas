@@ -54,6 +54,17 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781778748339
+    },
+    {
+      "id": "mqjd3djb0s9p",
+      "type": "gasto",
+      "cat": "ropa",
+      "sub": null,
+      "detail": "Uniqlo",
+      "amount": 79.6,
+      "date": "2026-06-18",
+      "note": null,
+      "ts": 1781778800711
     }
   ],
   "config": {
