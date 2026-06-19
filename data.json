@@ -1968,13 +1968,19 @@
       "date": "2026-06-18",
       "note": null,
       "ts": 1781803573744
+    },
+    {
+      "id": "mqkrt0glv22f",
+      "type": "gasto",
+      "cat": "otros_gasto",
+      "sub": null,
+      "detail": "Librería Arco Iris",
+      "amount": 2.2,
+      "date": "2026-06-19",
+      "note": null,
+      "ts": 1781863977621
     }
   ],
-  "config": {
-    "user": "jonito82",
-    "repo": "finanzas",
-    "meta": 40
-  },
   "patrimonio": [
     {
       "date": "2024-12-31",
@@ -2270,7 +2276,7 @@
       "ticker": "LOG",
       "nombre": "Logista",
       "sector": "Industrial",
-      "acciones": 47.0,
+      "acciones": 47,
       "pmc": 28.58,
       "currency": "EUR"
     },
@@ -2318,7 +2324,7 @@
       "ticker": "NOW",
       "nombre": "ServiceNow",
       "sector": "Tecnología",
-      "acciones": 20.0,
+      "acciones": 20,
       "pmc": 49.64,
       "currency": "USD"
     },
@@ -2334,7 +2340,7 @@
       "ticker": "PEP",
       "nombre": "Pepsi",
       "sector": "Consumo básico",
-      "acciones": 12.0,
+      "acciones": 12,
       "pmc": 115.37,
       "currency": "USD"
     },
@@ -2358,7 +2364,7 @@
       "ticker": "REP",
       "nombre": "Repsol",
       "sector": "Energía",
-      "acciones": 61.0,
+      "acciones": 61,
       "pmc": 12.08,
       "currency": "EUR"
     },
@@ -2366,7 +2372,7 @@
       "ticker": "RHI",
       "nombre": "Robert Half",
       "sector": "Industrial",
-      "acciones": 32.0,
+      "acciones": 32,
       "pmc": 22.95,
       "currency": "USD"
     },
@@ -2390,7 +2396,7 @@
       "ticker": "VICI",
       "nombre": "VICI",
       "sector": "REIT",
-      "acciones": 44.0,
+      "acciones": 44,
       "pmc": 22.95,
       "currency": "USD"
     },
@@ -2419,197 +2425,9 @@
       "currency": "USD"
     }
   ],
-  "cartera_snapshots": [
-    {
-      "fecha": "2026-05-31",
-      "cartera": [
-        {
-          "ticker": "ABBV",
-          "acciones": 9.162862,
-          "pmc": 177.88
-        },
-        {
-          "ticker": "ADP",
-          "acciones": 6.058989,
-          "pmc": 179.42
-        },
-        {
-          "ticker": "AENA",
-          "acciones": 49.47926,
-          "pmc": 23.98
-        },
-        {
-          "ticker": "AMZN",
-          "acciones": 5.6459,
-          "pmc": 22.9
-        },
-        {
-          "ticker": "ARCC",
-          "acciones": 122.95853,
-          "pmc": 16.93
-        },
-        {
-          "ticker": "ASTS",
-          "acciones": 27.208333,
-          "pmc": 22.93
-        },
-        {
-          "ticker": "AVGO",
-          "acciones": 3.77851,
-          "pmc": 349.87
-        },
-        {
-          "ticker": "BAM",
-          "acciones": 120.16426,
-          "pmc": 42.83
-        },
-        {
-          "ticker": "CME",
-          "acciones": 3.16387,
-          "pmc": 235.85
-        },
-        {
-          "ticker": "ENG",
-          "acciones": 89.819757,
-          "pmc": 12.17
-        },
-        {
-          "ticker": "GOOG",
-          "acciones": 5.1482,
-          "pmc": 154.58
-        },
-        {
-          "ticker": "HIMS",
-          "acciones": 43.51157,
-          "pmc": 22.26
-        },
-        {
-          "ticker": "IBE",
-          "acciones": 85.8091,
-          "pmc": 16.81
-        },
-        {
-          "ticker": "ITX",
-          "acciones": 18.02721,
-          "pmc": 42.83
-        },
-        {
-          "ticker": "JEPQ",
-          "acciones": 111.49469,
-          "pmc": 21.92
-        },
-        {
-          "ticker": "JGPI",
-          "acciones": 106.29025,
-          "pmc": 23.45
-        },
-        {
-          "ticker": "JNJ",
-          "acciones": 7.003975,
-          "pmc": 136.11
-        },
-        {
-          "ticker": "LLY",
-          "acciones": 0.7313,
-          "pmc": 842.67
-        },
-        {
-          "ticker": "LOG",
-          "acciones": 47.0,
-          "pmc": 28.58
-        },
-        {
-          "ticker": "MAIN",
-          "acciones": 63.33956,
-          "pmc": 46.72
-        },
-        {
-          "ticker": "MCD",
-          "acciones": 6.86223,
-          "pmc": 247.44
-        },
-        {
-          "ticker": "META",
-          "acciones": 2.00062,
-          "pmc": 577.31
-        },
-        {
-          "ticker": "MSFT",
-          "acciones": 2.53818,
-          "pmc": 394.79
-        },
-        {
-          "ticker": "NKE",
-          "acciones": 27.5,
-          "pmc": 39.13
-        },
-        {
-          "ticker": "NOW",
-          "acciones": 20.0,
-          "pmc": 49.64
-        },
-        {
-          "ticker": "O",
-          "acciones": 36.72831,
-          "pmc": 49.64
-        },
-        {
-          "ticker": "PEP",
-          "acciones": 12.0,
-          "pmc": 115.37
-        },
-        {
-          "ticker": "PG",
-          "acciones": 8.04061,
-          "pmc": 162.29
-        },
-        {
-          "ticker": "RED",
-          "acciones": 123.78005,
-          "pmc": 14.84
-        },
-        {
-          "ticker": "REP",
-          "acciones": 61.0,
-          "pmc": 12.08
-        },
-        {
-          "ticker": "RHI",
-          "acciones": 32.0,
-          "pmc": 22.95
-        },
-        {
-          "ticker": "SOFI",
-          "acciones": 90.83158,
-          "pmc": 14.23
-        },
-        {
-          "ticker": "UNH",
-          "acciones": 3.47862,
-          "pmc": 305.06
-        },
-        {
-          "ticker": "VICI",
-          "acciones": 44.0,
-          "pmc": 22.95
-        },
-        {
-          "ticker": "VID",
-          "acciones": 51.06088,
-          "pmc": 79.71
-        },
-        {
-          "ticker": "VIS",
-          "acciones": 51.16555,
-          "pmc": 39.13
-        },
-        {
-          "ticker": "JEDI",
-          "acciones": 1.6451,
-          "pmc": 91.8
-        }
-      ],
-      "total_invertido": 53165.07
-    }
-  ]
+  "config": {
+    "user": "jonito82",
+    "repo": "finanzas",
+    "meta": 40
+  }
 }
