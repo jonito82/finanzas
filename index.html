@@ -20,7 +20,7 @@
 }
 html,body{height:100%;background:var(--bg);overflow:hidden}
 body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;color:var(--text)}
-.shell{display:flex;height:100vh;width:100%}
+.shell{display:flex;height:100vh;height:100svh;width:100%;max-height:-webkit-fill-available}
 
 /* SIDEBAR */
 .sidebar{display:none;width:220px;background:var(--bg2);border-right:0.5px solid var(--border);flex-direction:column;flex-shrink:0;padding-top:env(safe-area-inset-top,0)}
@@ -50,7 +50,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
 .navbar-title{font-size:17px;font-weight:600}
 .navbar-sub{font-size:12px;color:var(--text3);margin-top:1px}
 .navbar-btn{width:34px;height:34px;border-radius:50%;background:var(--bg3);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);font-size:16px;flex-shrink:0}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .scroll::-webkit-scrollbar{width:5px}
 .scroll::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
 
@@ -64,7 +64,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
 .fab i{font-size:24px;color:#fff}
 
 /* SCREENS */
-.screen{display:none;padding-bottom:16px}
+.screen{display:none;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 80px)}
 .screen.active{display:block}
 
 /* SUMMARY */
@@ -311,7 +311,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;co
 .patr-chart-card{background:var(--bg3);border-radius:18px;margin:10px 12px 0;padding:14px;border:0.5px solid var(--border)}
 .patr-chart-title{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px}
 .patr-chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
-.patr-chart{display:flex;align-items:flex-end;gap:5px;height:80px;padding:0 2px}
+.patr-chart{display:flex;align-items:flex-end;gap:5px;height:140px;padding:0 2px}
 .patr-bar-grp{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;width:30px}
 .patr-bar{border-radius:4px 4px 0 0;background:var(--green);width:22px;min-height:3px}
 .patr-bar-lbl{font-size:9px;color:var(--text4);text-align:center}
@@ -1599,7 +1599,7 @@ function renderEvolucion(){
   let prevYear=null;
   recs.forEach((r,i)=>{
     const t=totals[i];
-    const h=Math.max(4,Math.round((t-mn)/range*68));
+    const h=Math.max(4,Math.round((t-mn)/range*120));
     const yr=r.date.slice(0,4);
     const mo=new Date(r.date+'T00:00').toLocaleDateString('es-ES',{month:'short'}).replace('.','');
     const showYear=yr!==prevYear; prevYear=yr;
@@ -1650,28 +1650,23 @@ function renderCartList(){
 
   const sorted=[...DATA.cartera].sort((a,b)=>(b.acciones*b.pmc)-(a.acciones*a.pmc));
   const totalInv=DATA.cartera.reduce((s,p)=>s+p.acciones*p.pmc,0);
-  const logoMap={"ABBV": "abbvie.com", "ADP": "adp.com", "AENA": "aena.es", "AMZN": "amazon.com", "ARCC": "arescapital.com", "ASTS": "ast-science.com", "AVGO": "broadcom.com", "BAM": "brookfield.com", "CME": "cmegroup.com", "ENG": "enagas.es", "GOOG": "google.com", "HIMS": "forhims.com", "IBE": "iberdrola.es", "ITX": "inditex.com", "JEPQ": "jpmorgan.com", "JGPI": "jpmorgan.com", "JNJ": "jnj.com", "LLY": "lilly.com", "LOG": "logista.com", "MAIN": "mainstcapital.com", "MCD": "mcdonalds.com", "META": "meta.com", "MSFT": "microsoft.com", "NKE": "nike.com", "NOW": "servicenow.com", "O": "realtyincome.com", "PEP": "pepsico.com", "PG": "pg.com", "RED": "redeia.es", "REP": "repsol.com", "RHI": "rhi.com", "SOFI": "sofi.com", "UNH": "unitedhealthgroup.com", "VICI": "viciproperties.com", "VID": "vidrala.com", "VIS": "viscofan.com", "JEDI": "vaneck.com"};
-  const sectorColors={"Salud": "#30d158", "Tecnolog\u00eda": "#0a84ff", "Industrial": "#ff9f0a", "C. Discrecional": "#ff6b6b", "Financiero": "#5e5ce6", "Utilities": "#64d2ff", "Energ\u00eda": "#ff9500", "REIT": "#ffd60a", "Consumo b\u00e1sico": "#ffe066", "ETF": "#a0a0a0", "Comunicaci\u00f3n": "#ff375f", "Otros": "#888"};
+  const sectorColors={"Salud": "#30d158", "Tecnolog\u00eda": "#0a84ff", "Industrial": "#ff9f0a", "C. Discrecional": "#ff6b6b", "Financiero": "#5e5ce6", "Utilities": "#64d2ff", "Energ\u00eda": "#ff9500", "REIT": "#ffd60a", "Consumo b\u00e1sico": "#c4a100", "ETF": "#a0a0a0", "Comunicaci\u00f3n": "#ff375f", "Otros": "#888"};
 
   list.innerHTML=sorted.map(p=>{
     const inv=p.acciones*p.pmc;
     const pct=totalInv>0?(inv/totalInv*100):0;
     const sym=p.currency==='EUR'?'€':'$';
-    const domain=logoMap[p.ticker]||'';
-    const logoUrl=domain?`https://logo.clearbit.com/${domain}`:'';
     const color=sectorColors[p.sector]||'#888';
-    const initials=p.ticker.slice(0,3);
     return `<div class="cart-row">
-      <div style="width:38px;height:38px;border-radius:10px;background:var(--bg4);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;margin-right:10px;position:relative">
-        ${logoUrl?`<img src="${logoUrl}" width="32" height="32" style="object-fit:contain;border-radius:6px" onerror="this.parentNode.innerHTML='<span style=\"font-size:10px;font-weight:800;color:var(--text2)\">${initials}</span>'">`:`<span style="font-size:10px;font-weight:800;color:var(--text2)">${initials}</span>`}
+      <div style="width:40px;height:40px;border-radius:10px;background:${color}22;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:10px">
+        <span style="font-size:${p.ticker.length>3?'8px':'10px'};font-weight:800;color:${color};letter-spacing:-.3px">${p.ticker}</span>
       </div>
       <div class="cart-info">
         <div style="display:flex;align-items:center;gap:5px;margin-bottom:1px">
-          <span style="font-size:13px;font-weight:700;color:var(--text)">${p.ticker}</span>
-          <span style="font-size:9px;font-weight:600;color:${color};background:${color}22;border-radius:4px;padding:1px 5px;flex-shrink:0">${p.sector}</span>
+          <span style="font-size:13px;font-weight:700;color:var(--text)">${p.nombre}</span>
         </div>
-        <div style="font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:155px">${p.nombre}</div>
         <div style="font-size:10px;color:var(--text4);margin-top:2px">${p.acciones.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:4})} acc · PMC ${sym}${p.pmc.toFixed(2)}</div>
+        <div style="margin-top:3px"><span style="font-size:9px;font-weight:600;color:${color};background:${color}18;border-radius:4px;padding:1px 5px">${p.sector}</span></div>
       </div>
       <div class="cart-right">
         <div style="font-size:14px;font-weight:700;color:var(--text)">${sym}${inv.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
@@ -1680,7 +1675,6 @@ function renderCartList(){
     </div>`;
   }).join('');
 
-  // Update header card
   const fmt=v=>v.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
   const totalEl=document.getElementById('cartTotal');
   const invEl=document.getElementById('cartInvertido');
@@ -1688,7 +1682,6 @@ function renderCartList(){
   if(totalEl) totalEl.textContent=fmt(totalInv)+' €';
   if(invEl) invEl.textContent=fmt(totalInv)+' €';
   if(gpEl){ gpEl.textContent='—'; gpEl.style.color='var(--text2)'; }
-
   renderCartRentabilidad(totalInv, totalInv);
   renderCartSectors();
 }
