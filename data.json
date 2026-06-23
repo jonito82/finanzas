@@ -1990,6 +1990,17 @@
       "date": "2026-06-20",
       "note": null,
       "ts": 1781942505843
+    },
+    {
+      "id": "mqqjx631dxgf",
+      "type": "gasto",
+      "cat": "otros_gasto",
+      "sub": null,
+      "detail": "Airpods",
+      "amount": 133.95,
+      "date": "2026-06-23",
+      "note": null,
+      "ts": 1782213531661
     }
   ],
   "patrimonio": [
