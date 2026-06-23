@@ -2001,6 +2001,17 @@
       "date": "2026-06-23",
       "note": null,
       "ts": 1782213531661
+    },
+    {
+      "id": "mqqz7hqu06k1",
+      "type": "gasto",
+      "cat": "amazon",
+      "sub": null,
+      "detail": "Cinta de andar",
+      "amount": 135.36,
+      "date": "2026-06-23",
+      "note": null,
+      "ts": 1782239207574
     }
   ],
   "patrimonio": [
