@@ -2012,6 +2012,17 @@
       "date": "2026-06-23",
       "note": null,
       "ts": 1782239207574
+    },
+    {
+      "id": "mqtodujjodxh",
+      "type": "ingreso",
+      "cat": "box_extra",
+      "sub": null,
+      "detail": null,
+      "amount": 15,
+      "date": "2026-06-25",
+      "note": null,
+      "ts": 1782402426847
     }
   ],
   "patrimonio": [
