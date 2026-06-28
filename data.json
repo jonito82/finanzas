@@ -2023,6 +2023,17 @@
       "date": "2026-06-25",
       "note": null,
       "ts": 1782402426847
+    },
+    {
+      "id": "mqxsldp625nl",
+      "type": "gasto",
+      "cat": "ropa",
+      "sub": null,
+      "detail": "Hoka - Vinted",
+      "amount": 83.4,
+      "date": "2026-06-28",
+      "note": null,
+      "ts": 1782651361434
     }
   ],
   "patrimonio": [
